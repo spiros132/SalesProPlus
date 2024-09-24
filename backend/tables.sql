@@ -26,7 +26,8 @@ CREATE TABLE ProductDimensions (
 CREATE VIRTUAL TABLE ProductsFTS USING fts5 (
     articleID,
     name,
-    description
+    description,
+    tokenize="trigram case_sensitive 0"
 );
 
 CREATE TRIGGER after_products_insert_update
