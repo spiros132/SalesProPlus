@@ -18,7 +18,11 @@ CREATE TABLE ProductInformation (
 
 CREATE TABLE ProductDimensions (
     articleID INT PRIMARY KEY,
-    dimensions TEXT,
+    unit CHECK( unit IN ('CM','M','H') ),
+    height INT,
+    width INT,
+    depth INT,
+    length INT,
     packaging TEXT,
     FOREIGN KEY (articleID) REFERENCES Products(articleID)
 );
