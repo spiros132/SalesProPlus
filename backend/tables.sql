@@ -1,4 +1,4 @@
-CREATE TABLE Products (
+CREATE virtual TABLE Products using FTS5(
     articleID INT PRIMARY KEY,
     name TEXT NOT NULL,
     price INT NOT NULL,

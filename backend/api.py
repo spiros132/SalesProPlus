@@ -4,12 +4,13 @@ import sqlite3
 db = sqlite3.connect("test.db")
 app = FastAPI()
 
+
 @app.get("/search/{prompt}")
 def search_prompt(prompt: str):
 
     with db.cursor() as cur:
         res = cur.execute("""
-            select * from Products where description like ?
+            select * from Products where description match ?
             """, prompt)
         
     return res.Rows
