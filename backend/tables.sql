@@ -1,4 +1,4 @@
-CREATE TABLE Products (
+CREATE virtual TABLE Products using FTS5(
     articleID INT PRIMARY KEY,
     name TEXT NOT NULL,
     price INT NOT NULL,
@@ -26,7 +26,8 @@ CREATE TABLE ProductDimensions (
 CREATE VIRTUAL TABLE ProductsFTS USING fts5 (
     articleID,
     name,
-    description
+    description,
+    prefix='2,3'
 );
 
 CREATE TRIGGER after_products_insert_update

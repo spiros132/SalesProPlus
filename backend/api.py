@@ -2,12 +2,13 @@ from fastapi import FastAPI
 import uvicorn
 import sqlite3
 
+DB_PATH = "test.db"
 app = FastAPI()
 
 @app.get("/search/{prompt}")
 def search_prompt(prompt: str):
 
-    db = sqlite3.connect("test.db")
+    db = sqlite3.connect(DB_PATH)
 
     cursor = db.cursor()
     
@@ -28,7 +29,7 @@ def search_prompt(prompt: str):
 @app.get("/product/{id}")
 def product_page(id: int):
 
-    db = sqlite3.connect("test.db")
+    db = sqlite3.connect(DB_PATH)
 
     cursor =  db.cursor()
     cursor.execute("""
