@@ -13,11 +13,13 @@ def search_prompt(prompt: str):
     cursor = db.cursor()
     
     cursor.execute("""
-        SELECT 
+        SELECT
+            BM25(ProductsFTS),
             p.articleID 
         FROM Products p
         JOIN ProductsFTS s ON p.articleID = s.articleID 
         WHERE ProductsFTS MATCH ?
+        ORDER BY BM25(ProductsFTS)
         """, (prompt,))
     
     result = cursor.fetchall()
@@ -52,7 +54,7 @@ def product_page(id: int):
     result = cursor.fetchone()
     cursor.close()
     db.close()
-        
+    
     return result 
 
 
