@@ -1,9 +1,10 @@
 from fastapi import FastAPI
 import sqlite3
 
-db = sqlite3.connect("test.db")
-app = FastAPI()
+DB_PATH = "test.db"
 
+db = sqlite3.connect(DB_PATH)
+app = FastAPI()
 
 @app.get("/search/{prompt}")
 def search_prompt(prompt: str):
@@ -24,19 +25,5 @@ def product_page(id: int):
             """, id)
         
     return res.Rows
-
-
-
-
-
- 
-
-
-cursor = db.cursor()
-
-""" with open('insert.sql', 'r') as sql_file:
-    sql_script = sql_file.read()
-
- cursor.executescript(sql_script) """
 
 db.close()
