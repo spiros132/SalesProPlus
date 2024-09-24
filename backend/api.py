@@ -1,18 +1,41 @@
 from fastapi import FastAPI
 import sqlite3
 
+db = sqlite3.connect("test.db")
 app = FastAPI()
 
-@app.get("/")
-def get_root():
-    return {"Hello": "World"}
+@app.get("/search/{prompt}")
+def search_prompt(prompt: str):
 
-connection = sqlite3.connect("test.db")
-cursor = connection.cursor()
+    with db.cursor() as cur:
+        res = cur.execute("""
+            select * from Products where description like ?
+            """, prompt)
+        
+    return res.Rows
+    
+@app.get("/product/{id}")
+def product_page(id: int):
+
+    with db.cursor() as cur:
+        res = cur.execute("""
+            select * from ProductInformation where ArticleId = ?
+            """, id)
+        
+    return res.Rows
+
+
+
+
+
+ 
+
+
+cursor = db.cursor()
 
 """ with open('insert.sql', 'r') as sql_file:
     sql_script = sql_file.read()
 
-cursor.executescript(sql_script) """
+ cursor.executescript(sql_script) """
 
-connection.close()
+db.close()
