@@ -23,6 +23,7 @@ export default function Layout({children}) {
     if(searchQuery.length > 0) {
         // Redirect to search page???? 
     }
+    }
 
     return (
     <div className="flex flex-col min-h-screen">
@@ -65,9 +66,4 @@ export default function Layout({children}) {
         </nav>
     </div>
     )
-
-
-
-
-
-}
+    }

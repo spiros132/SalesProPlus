@@ -1,4 +1,4 @@
-import Startpage from './categories/startpage'
+import Startpage from './startpage/startpage'
 
 export default function Home() {
     return <Startpage/>
