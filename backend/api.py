@@ -1,6 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 import uvicorn
 import sqlite3
+from pydantic import BaseModel
 
 DB_PATH = "test.db"
 app = FastAPI()
@@ -70,7 +71,69 @@ def product_page(id: int):
     if result:
         return dict(zip(column_names, result))
     else:
-        return {"error": "no product found"}
+        return HTTPException(status_code=404, detail="No products Found")
+
+class LoginForm(BaseModel):
+    username: str
+
+@app.post("/login")
+def login(loginForm: LoginForm):
+
+    db = sqlite3.connect(DB_PATH)
+
+    cursor =  db.cursor()
+
+    cursor.execute(""" 
+        SELECT * 
+        FROM User 
+        WHERE username = ?
+        """,(loginForm.username,))
+    
+    user = cursor.fetchone()
+
+    cursor.close()
+    db.close()
+
+    if user:
+        return {"success": True, "username": user[0], "region": user[1]}
+    else:
+        raise HTTPException(status_code=401, detail="User not found")
+
+class RegisterForm(BaseModel):
+    username: str
+    region: str
+
+@app.post("/register")
+def register(registerForm: RegisterForm):
+    
+    db = sqlite3.connect(DB_PATH)
+
+    cursor =  db.cursor()
+
+    cursor.execute(""" 
+        SELECT * 
+        FROM User 
+        WHERE username = ?
+        """,(registerForm.username,))
+    
+    user = cursor.fetchone()
+
+    if user:
+        cursor.close()
+        db.close()
+        raise HTTPException(status_code=400, detail="Username already taken")
+    
+    cursor.execute("""
+        INSERT INTO User (username, region) 
+        VALUES (?, ?)
+        """, (registerForm.username, registerForm.region))
+    db.commit()
+
+    cursor.close()
+    db.close()
+
+    return {"success": True, "username": registerForm.username, "region": registerForm.region}
+    
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

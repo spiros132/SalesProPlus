@@ -1,3 +1,8 @@
+CREATE TABLE User (
+    username TEXT NOT NULL,
+    region TEXT NOT NULL
+);
+
 CREATE TABLE Products (
     articleID INT PRIMARY KEY,
     name TEXT NOT NULL,
