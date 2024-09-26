@@ -1,4 +1,5 @@
-import Layout from '../components/layout'
+import Startpage from './categories/startpage'
+
 export default function Home() {
-    return <Layout>Hello world!</Layout>
+    return <Startpage/>
 }
