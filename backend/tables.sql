@@ -1,5 +1,6 @@
 CREATE TABLE User (
     username TEXT NOT NULL,
+    department TEXT NOT NULL,
     region TEXT NOT NULL
 );
 

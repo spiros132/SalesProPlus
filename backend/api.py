@@ -95,12 +95,13 @@ def login(loginForm: LoginForm):
     db.close()
 
     if user:
-        return {"success": True, "username": user[0], "region": user[1]}
+        return {"success": True, "username": user[0], "department": user[1], "region": user[2]}
     else:
         raise HTTPException(status_code=401, detail="User not found")
 
 class RegisterForm(BaseModel):
     username: str
+    department: str
     region: str
 
 @app.post("/register")
@@ -124,15 +125,15 @@ def register(registerForm: RegisterForm):
         raise HTTPException(status_code=400, detail="Username already taken")
     
     cursor.execute("""
-        INSERT INTO User (username, region) 
-        VALUES (?, ?)
-        """, (registerForm.username, registerForm.region))
+        INSERT INTO User (username, department, region) 
+        VALUES (?, ?, ?)
+        """, (registerForm.username, registerForm.department, registerForm.region))
     db.commit()
 
     cursor.close()
     db.close()
 
-    return {"success": True, "username": registerForm.username, "region": registerForm.region}
+    return {"success": True, "username": registerForm.username, "department": registerForm.department, "region": registerForm.region}
     
 
 if __name__ == "__main__":
