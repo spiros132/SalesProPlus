@@ -19,5 +19,16 @@ export interface Product {
     price: number;
     shortdescription: string;
     stock: number;
-    dimensions: string;
+    dimensions: {height: number, width: number, depth: number};
+}
+/**
+ * Filter interface, defines the contents of a filter.
+ */
+export interface filters {
+    category: string;
+    price: number;
+    stock: number;
+    width: number;
+    height: number;
+    depth: number;
 }

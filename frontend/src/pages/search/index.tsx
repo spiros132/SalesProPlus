@@ -3,7 +3,6 @@ import {  useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Product } from "../../lib/definitions";
 import SearchResult from "../../components/searchResult"
-import { products } from "@/src/lib/fakeDB";
 
     /**
      * The search result/page component.
@@ -25,11 +24,6 @@ import { products } from "@/src/lib/fakeDB";
                 // API Call 
                 // setSearchResults(data)
 
-                // Temporary, should be done before this.
-                const filteredProducts = products.filter(product => 
-                    product.name.toLowerCase().includes(searchQuery.toLowerCase())
-                );
-                setSearchResults(filteredProducts.length > 0 ? filteredProducts : products);
             } else {
                 setSearchResults([])
             }
