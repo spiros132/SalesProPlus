@@ -13,7 +13,7 @@ import { Check, X } from "lucide-react";
         stock: number;
         dimensions: string;
     }
-    
+
     const products: Product[] = [
         { id: 1, name: "Modern Sofa", image: "/assets/categoryassets/1.jpg", price: 999.99, shortdescription: "A modern sofa for your living room.", stock: 10, dimensions: "200x100x50" },
         { id: 2, name: "Leather Armchair", image: "/assets/categoryassets/1.jpg", price: 599.99, shortdescription: "A comfortable leather armchair.", stock: 0, dimensions: "100x100x50" },
@@ -54,7 +54,7 @@ import { Check, X } from "lucide-react";
     return(
         <div className="space-y-4">
         {searchResults.map((product) => (
-            <Link href={`/product/${product.id}`} key={product.id} className="block">
+            <Link href={`/products/?id=${product.id}`} key={product.id} className="block">
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
                 <div className="p-4 flex items-center space-x-4">
                     <Image
