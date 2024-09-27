@@ -35,7 +35,7 @@ const products = [
  */
 export default function Startpage() {
 
-    const [selectedCategory, setSelectedCategory] = useState(null)
+    const [selectedCategory, setSelectedCategory] = useState<{ id: number; name: string; image: string; products: number[] | null; parent: number } | null>(null)
     const [carouselIndex, setCarouselIndex] = useState(0)
   
   
@@ -43,8 +43,8 @@ export default function Startpage() {
      * Transforms the id given by the click into the object, and then sets it.
      * @param category the category the user clicked on.
      */
-    const handleCategoryClick = (category) => {
-      category = categories[category-1];
+    const handleCategoryClick = (category_id: number) => {
+      let category = categories[category_id-1];
       setSelectedCategory(category)
       setCarouselIndex(0)
     }
@@ -54,9 +54,9 @@ export default function Startpage() {
      * @param items the categories shown in the grid.
      * @returns a grid of categories.
      */
-    const renderGrid = (items) => (
+    const renderGrid = (items: { id: number; name: string; image: string; products: number[] | null; parent: number }[]) => (
       <div className="grid grid-cols-2 gap-4">
-      {items.map((item) => (
+      {items.map((item: { id: number; name: string; image: string; products: number[] | null; parent: number }) => (
         <button 
             key={item.id} 
             className="block bg-white overflow-hidden p-2"
@@ -83,14 +83,14 @@ export default function Startpage() {
      * @returns a carousel of categories.
      */
     const renderCarousel = () => {
-      const handleDragStart = (e) => {
-      e.preventDefault();
+      const handleDragStart = (e: { preventDefault: () => void }) => {
+        // Do we want to do something here?
       };
 
       return (
       <div className="relative mt-4 border-b-2 border-t-2">
         <div className="flex overflow-x-auto scrollbar-hide space-x-2 p-2" onDragStart={handleDragStart}>
-        {categories.filter(category => category.parent === selectedCategory.id).map((subcategory, index) => (
+        {selectedCategory && categories.filter(category => category.parent === selectedCategory.id).map((subcategory, index) => (
           <div 
           key={subcategory.id}
           className={`flex-none w-1/4 bg-white overflow-hidden cursor-pointer 
@@ -119,24 +119,26 @@ export default function Startpage() {
      */
     const renderProducts = () => (
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-        {selectedCategory.products.map((product) => (
-          product = products[product-1],
-          <Link href={`/product/${product.id}`} key={product.id} className="block">
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <Image
-                src={product.image}
-                alt={product.name}
-                width={50}
-                height={50}
-                className="w-full h-auto"
-              />
-              <div className="p-2">
-                <h3 className="font-semibold text-sm">{product.name}</h3>
-                <p className="text-xs text-gray-600">{product.price.toFixed(2)} kr</p>
+        {selectedCategory && selectedCategory.products && selectedCategory.products.map((productId) => {
+          const product = products.find(p => p.id === productId);
+          return product ? (
+            <Link href={`/product/${product.id}`} key={product.id} className="block">
+              <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  width={50}
+                  height={50}
+                  className="w-full h-auto"
+                />
+                <div className="p-2">
+                  <h3 className="font-semibold text-sm">{product.name}</h3>
+                  <p className="text-xs text-gray-600">{product.price.toFixed(2)} kr</p>
+                </div>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ) : null;
+        })}
       </div>
     )
     
