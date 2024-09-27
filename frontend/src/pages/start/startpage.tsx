@@ -66,8 +66,8 @@ export default function Startpage() {
             <Image
                 src={item.image}
                 alt={item.name}
-                width={50}
-                height={50}
+                width={1280}
+                height={720}
                 style={{ alignSelf: 'center' }}
                 className="w-full h-auto"
             />

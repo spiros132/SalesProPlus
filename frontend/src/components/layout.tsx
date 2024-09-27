@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import { Home, MessageCircle, Settings, Search } from 'lucide-react'
+import { Home, MessageCircle, Settings, Search, Filter } from 'lucide-react'
 
 
 /**
@@ -40,7 +40,7 @@ export default function Layout({children}) {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="flex-grow p-2 focus:outline-none "
                 />
-                
+                <Filter className="h-full w-auto p-2 border-l-2" />
             </form>
         </header>
 
