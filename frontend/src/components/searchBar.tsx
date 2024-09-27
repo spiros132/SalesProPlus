@@ -44,7 +44,7 @@ export default function SearchBar() {
                     className="flex-grow p-2 bg-gray-100 focus:outline-none "
                     />
                     {(isFocused || searchQuery.length > 0) && (
-                    <button type="submit" className="p-2 bg-white text-black ">
+                    <button type="submit" className="p-2 bg-gray-100 text-black ">
                         <Search className="h-5 w-5" />
                         <span className="sr-only">Search</span>
                     </button>

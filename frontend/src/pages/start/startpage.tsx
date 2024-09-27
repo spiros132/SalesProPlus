@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { products } from '../../lib/fakeDB'
 import { categories } from '../../lib/fakeDB'
+import { Category } from '@/src/lib/definitions'
+import CategoryProduct from '@/src/components/categoryProduct'
 // replace with api
 
 /**
@@ -33,7 +35,7 @@ export default function Startpage() {
      */
     const renderGrid = (items: { id: number; name: string; image: string; products: number[] | null; parent: number }[]) => (
       <div className="grid grid-cols-2 gap-4">
-      {items.map((item: { id: number; name: string; image: string; products: number[] | null; parent: number }) => (
+      {items.map((item: Category) => (
         <button 
             key={item.id} 
             className="block bg-white overflow-hidden p-2"
@@ -99,21 +101,7 @@ export default function Startpage() {
         {selectedCategory && selectedCategory.products && selectedCategory.products.map((productId) => {
           const product = products.find(p => p.id === productId);
           return product ? (
-            <Link href={`/product/${product.id}`} key={product.id} className="block">
-              <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  width={50}
-                  height={50}
-                  className="w-full h-auto"
-                />
-                <div className="p-2">
-                  <h3 className="font-semibold text-sm">{product.name}</h3>
-                  <p className="text-xs text-gray-600">{product.price.toFixed(2)} kr</p>
-                </div>
-              </div>
-            </Link>
+            <CategoryProduct key={product.id} product={product} />
           ) : null;
         })}
       </div>
