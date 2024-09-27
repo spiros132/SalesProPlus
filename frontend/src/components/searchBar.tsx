@@ -14,6 +14,7 @@ export default function SearchBar() {
     const [filter, setFilter] = useState('')
     const [sort, setSort] = useState('')
     const router = useRouter()
+    const [isFocused, setIsFocused] = useState(false);
 
     /**
      * Handling of the search. 
@@ -27,20 +28,29 @@ export default function SearchBar() {
     }
 
     return (
-        <header className="sticky top-0 z-10 bg-white p-4 border-b-2">
-            <form onSubmit={handleSearch} className="flex items-center border border-gray-300 focus:ring-2 focus:ring-blue-500">
-                <button type="submit" className="p-2 bg-white text-black ">
-                    <Search className="h-5 w-5" />
-                    <span className="sr-only">Search</span>
-                </button>
-                <input
-                type="search"
-                placeholder="Search products..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-grow p-2 focus:outline-none "
-                />
-                <Filter className="h-full w-auto p-2 border-l-2" />
+        <header className=" sticky top-0 z-10  bg-white p-4 border-b-2 ">
+            <form onSubmit={handleSearch} className="flex items-center  ">
+                <div className="flex-grow bg-gray-100 flex items-center border rounded-2xl overflow-hidden border-gray-300 ">
+                    {(!isFocused && searchQuery.length == 0) && (
+                    <Search className="ml-2 h-5 w-5" />
+                    )}
+                    <input
+                    type="search"
+                    placeholder="Search products..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onFocus={() => setIsFocused(true)}
+                    onBlur={() => setIsFocused(false)}
+                    className="flex-grow p-2 bg-gray-100 focus:outline-none "
+                    />
+                    {(isFocused || searchQuery.length > 0) && (
+                    <button type="submit" className="p-2 bg-white text-black ">
+                        <Search className="h-5 w-5" />
+                        <span className="sr-only">Search</span>
+                    </button>
+                    )}
+                </div>
+                <Filter className="h-full w-auto p-2" />
             </form>
         </header>
     )
