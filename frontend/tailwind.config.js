@@ -13,6 +13,10 @@ module.exports = {
         sans: ["var(--font-sans)"],
         mono: ["var(--font-mono)"],
       },
+      colors: {
+        activeNavGray: 'rgb(213, 213, 213)',
+        navBorderGray: 'rgb(225,225,225)'
+      }
     },
   },
   darkMode: "class",
