@@ -1,4 +1,3 @@
-import Link from "next/link"
 import {  useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Product } from "../../lib/definitions";

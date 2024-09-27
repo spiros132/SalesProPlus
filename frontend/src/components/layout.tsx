@@ -1,7 +1,7 @@
 import SearchBar from './searchBar'
 import NavBar from './navBar'
 import { ReactNode } from 'react';
-
+import Head from 'next/head';
 
 interface LayoutProps {
     children: ReactNode;
@@ -13,7 +13,10 @@ interface LayoutProps {
  * @returns  a layout consisting of a top search bar, a bottom nav bar and the children between them.
  */
 export default function Layout({ children }: LayoutProps) {
-    return (
+    return (<>
+    <Head>
+        <title>IKEA Sales Pro Plus</title>
+    </Head>
     <div className="flex flex-col min-h-screen">
         <SearchBar/>
         <main className="flex-grow p-4">
@@ -21,5 +24,5 @@ export default function Layout({ children }: LayoutProps) {
         </main>
         <NavBar/>
     </div>
-    )
+    </>)
     }
