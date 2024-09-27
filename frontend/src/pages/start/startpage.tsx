@@ -50,7 +50,7 @@ export default function Startpage() {
                 style={{ alignSelf: 'center' }}
                 className="w-full h-auto"
             />
-            <h2 className="mt-2 text-center font-semibold">{item.name}</h2>
+            <span className="mt-2 text-center font-semibold">{item.name}</span>
           </div>
         </button>
       ))}
@@ -83,7 +83,7 @@ export default function Startpage() {
             height={50}
             className="w-full h-auto"
           />
-          <h3 className="mt-1 p-1 text-center font-semibold text-xs sm:text-sm">{subcategory.name}</h3>
+          <span className="mt-1 p-1 text-center font-semibold text-xs sm:text-sm">{subcategory.name}</span>
           </div>
         ))}
         </div>
@@ -92,7 +92,6 @@ export default function Startpage() {
     };
   
     /**
-     * Hur gör man för att få produktID från länken?????????????????????????????????????
      * This handles the creation of the products object and it's content.
      * @returns a grid of products.
      */
