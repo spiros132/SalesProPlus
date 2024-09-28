@@ -5,23 +5,19 @@ from dotenv import load_dotenv
 from pydantic import BaseModel
 import os
 
-
 from vanna.remote import VannaDefault
 from vanna.flask import VannaFlaskApp
-
-
 
 DB_PATH = "test.db"
 app = FastAPI()
 load_dotenv() 
 
-@app.get("/chat")
+@app.get("/chat/{question}")
 def chat(question: str):
-    vn = VannaDefault(model='ikea', api_key=os.getenv("VANNA_KEY"), allow_llm_to_see_data=True)
+    vn = VannaDefault(model='ikea', api_key=os.getenv("VANNA_KEY"))
     vn.connect_to_sqlite("./backend/test.db") 
 
-    query = vn.generate_sql(question)
-    return vn.run_sql(query)
+    return vn.ask(question)
 
 @app.get("/search/{prompt}")
 def search_prompt(prompt: str):
