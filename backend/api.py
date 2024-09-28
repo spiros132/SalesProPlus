@@ -1,10 +1,27 @@
 from fastapi import FastAPI, HTTPException
 import uvicorn
 import sqlite3
+from dotenv import load_dotenv
 from pydantic import BaseModel
+import os
+
+
+from vanna.remote import VannaDefault
+from vanna.flask import VannaFlaskApp
+
+
 
 DB_PATH = "test.db"
 app = FastAPI()
+load_dotenv() 
+
+@app.get("/chat")
+def chat(question: str):
+    vn = VannaDefault(model='ikea', api_key=os.getenv("VANNA_KEY"), allow_llm_to_see_data=True)
+    vn.connect_to_sqlite("./backend/test.db") 
+
+    query = vn.generate_sql(question)
+    return vn.run_sql(query)
 
 @app.get("/search/{prompt}")
 def search_prompt(prompt: str):
@@ -137,4 +154,10 @@ def register(registerForm: RegisterForm):
     
 
 if __name__ == "__main__":
+
+    if True:
+        vn = VannaDefault(model='ikea', api_key=os.getenv("VANNA_KEY"), )
+        vn.connect_to_sqlite("./backend/test.db", ) 
+        VannaFlaskApp(vn, allow_llm_to_see_data=True).run()
+
     uvicorn.run(app, host="0.0.0.0", port=8000)
