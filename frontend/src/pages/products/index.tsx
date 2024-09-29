@@ -1,6 +1,6 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Product } from "@/src/lib/definitions";
+import { dimensions, Product } from "@/src/lib/definitions";
 import { products } from "@/src/lib/fakeDB";
 
 export default function Products() {
@@ -12,7 +12,7 @@ export default function Products() {
     const [image, setImage] = useState<string>();
     const [price, setPrice] = useState<number>();
     const [stock, setStock] = useState<number>();
-    const [dimensions, setDimensions] = useState<string>();
+    const [dimensions, setDimensions] = useState<dimensions>();
     
     function GetStock(stock: number | undefined) {
         if(stock == undefined)
@@ -20,7 +20,7 @@ export default function Products() {
         else {
             return <>
                 <p className={"before:inline-block before:mr-1 before:rounded-full before:w-3 before:h-3 before:" + ((stock > 0) ? "bg-green-500" : "bg-red-500")}>
-                    {stock} stock i lager
+                    {stock} in stock
                 </p>
             </>;
         }
@@ -63,7 +63,7 @@ export default function Products() {
             <h1 className="text-3xl font-bold">{name}</h1>
             <div className="py-2">
                 <p className="text-sm">{description}</p>
-                <p className="text-sm">{dimensions} cm</p>
+                <p className="text-sm">{dimensions?.width}x{dimensions?.height}x{dimensions?.depth} cm</p>
             </div>
             { GetStock(stock) }
             <p className="text-xl font-bold">{price} :-</p>

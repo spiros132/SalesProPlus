@@ -1,4 +1,13 @@
 /**
+ * Dimension interface
+ */
+export interface dimensions {
+    height: number;
+    width: number;
+    depth: number;
+}
+
+/**
  * Category interface, defines the contents of a category.
  */
 export interface Category {
@@ -19,7 +28,7 @@ export interface Product {
     price: number;
     shortdescription: string;
     stock: number;
-    dimensions: {height: number, width: number, depth: number};
+    dimensions: dimensions;
 }
 /**
  * Filter interface, defines the contents of a filter.
@@ -28,7 +37,6 @@ export interface filters {
     category: string;
     price: number;
     stock: number;
-    width: number;
-    height: number;
-    depth: number;
+    dimensions: dimensions;
 }
+
