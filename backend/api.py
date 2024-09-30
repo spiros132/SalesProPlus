@@ -12,12 +12,17 @@ DB_PATH = "test.db"
 app = FastAPI()
 load_dotenv() 
 
+# a function to send the question to the model and return the answer using vanna api
 @app.get("/chat/{question}")
 def chat(question: str):
+
     vn = VannaDefault(model='ikea', api_key=os.getenv("VANNA_KEY"))
     vn.connect_to_sqlite("./backend/test.db") 
 
-    return vn.ask(question)
+    query = vn.generate_sql(question)
+    answer = vn.run_sql(query)
+
+    return answer.to_json()
 
 @app.get("/search/{prompt}")
 def search_prompt(prompt: str):
@@ -151,7 +156,7 @@ def register(registerForm: RegisterForm):
 
 if __name__ == "__main__":
 
-    if True:
+    if False:
         vn = VannaDefault(model='ikea', api_key=os.getenv("VANNA_KEY"), )
         vn.connect_to_sqlite("./backend/test.db", ) 
         VannaFlaskApp(vn, allow_llm_to_see_data=True).run()
