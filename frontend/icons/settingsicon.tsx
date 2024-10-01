@@ -3,7 +3,7 @@ export default function SettingsIcon() {
 
         <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
             <ellipse 
-                style={{stroke: 'rgb(0, 0, 0)', fill: 'rgba(255, 255, 255, 0)', strokeWidth: '41px'}}
+                style={{stroke: 'rgb(0, 0, 0)', fill: 'rgba(255, 255, 255, 0)', strokeWidth: '40px'}}
                 cx="250"
                 cy="250"
                 rx="115" 

@@ -21,23 +21,23 @@ function BottomNavBar() {
         <nav className="fixed flex bottom-0 left-0 right-0 bg-white text-black, h-[12vh] border-t-3 border-navBorderGray">
             <div className="flex flex-1 h-full items-center justify-center">
                 <Link className={`h-[10vh] w-[10vh] rounded-[35%] flex flex-col items-center justify-center text-black hover:bg-activeNavGray
-                    transition duration-300 ease-in-out ${pathName === '/' ? 'bg-activeNavGray' : 'bg-white'} p-4`}  href="/">
-                    <div className="w-full h-full pt-1"><SearchIcon></SearchIcon></div>
+                    transition duration-300 ease-in-out ${pathName === '/' ? 'bg-activeNavGray' : 'bg-white'} p-5`}  href="/">
+                    <div className="w-full h-full"><SearchIcon></SearchIcon></div>
                     <p className="text-md pb-1">Browse</p>
                 </Link>                    
                  
             </div>
             <div className="flex flex-1 h-full items-center justify-center">
                 <Link className={`h-[10vh] w-[10vh] rounded-[30%] flex flex-col items-center justify-center text-black hover:bg-activeNavGray
-                    transition duration-300 ease-in-out ${pathName === '/' ? 'bg-white' : 'bg-gray-300'} p-4`} href="/">
-                    <div className="w-full h-full pt-1"><ChatIcon></ChatIcon></div>
+                    transition duration-300 ease-in-out ${pathName === '/' ? 'bg-white' : 'bg-gray-300'} p-5`} href="/">
+                    <div className="w-full h-full"><ChatIcon></ChatIcon></div>
                     <p className="text-md pb-1">Chat</p>
                 </Link>  
             </div>
             <div className="flex flex-1 h-full items-center justify-center">
                 <Link className={`h-[10vh] w-[10vh] aspect-[1/1] rounded-[30%] flex flex-col items-center justify-center text-black hover:bg-activeNavGray
-                    transition duration-300 ease-in-out ${pathName === '/' ? 'bg-white' : 'bg-gray-300'} p-4`} href="/">
-                    <div className="w-full h-full pt-1"><SettingsIcon></SettingsIcon></div>
+                    transition duration-300 ease-in-out ${pathName === '/' ? 'bg-white' : 'bg-gray-300'} p-5`} href="/">
+                    <div className="w-full h-full"><SettingsIcon></SettingsIcon></div>
                     <p className="text-md pb-1">Settings</p>
                 </Link>
             </div>
