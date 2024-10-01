@@ -15,7 +15,8 @@ module.exports = {
       },
       colors: {
         activeNavGray: 'rgb(213, 213, 213)',
-        navBorderGray: 'rgb(225,225,225)'
+        navBorderGray: 'rgb(225,225,225)',
+        iconGray: 'rgb(64,64,64)'
       }
     },
   },

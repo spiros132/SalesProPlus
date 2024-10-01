@@ -23,7 +23,7 @@ function BottomNavBar() {
                 <Link className={`h-[10vh] w-[10vh] rounded-[35%] flex flex-col items-center justify-center text-black hover:bg-activeNavGray
                     transition duration-300 ease-in-out ${pathName === '/' ? 'bg-activeNavGray' : 'bg-white'} p-5`}  href="/">
                     <div className="w-full h-full"><SearchIcon></SearchIcon></div>
-                    <p className="text-md pb-1">Browse</p>
+                    <p className="text-md pb-1 font-semibold text-iconGray">Browse</p>
                 </Link>                    
                  
             </div>
@@ -31,14 +31,14 @@ function BottomNavBar() {
                 <Link className={`h-[10vh] w-[10vh] rounded-[30%] flex flex-col items-center justify-center text-black hover:bg-activeNavGray
                     transition duration-300 ease-in-out ${pathName === '/' ? 'bg-white' : 'bg-gray-300'} p-5`} href="/">
                     <div className="w-full h-full"><ChatIcon></ChatIcon></div>
-                    <p className="text-md pb-1">Chat</p>
+                    <p className="text-md pb-1 font-semibold text-iconGray">Chat</p>
                 </Link>  
             </div>
             <div className="flex flex-1 h-full items-center justify-center">
                 <Link className={`h-[10vh] w-[10vh] aspect-[1/1] rounded-[30%] flex flex-col items-center justify-center text-black hover:bg-activeNavGray
                     transition duration-300 ease-in-out ${pathName === '/' ? 'bg-white' : 'bg-gray-300'} p-5`} href="/">
                     <div className="w-full h-full"><SettingsIcon></SettingsIcon></div>
-                    <p className="text-md pb-1">Settings</p>
+                    <p className="text-md pb-1 font-semibold text-iconGray">Settings</p>
                 </Link>
             </div>
         </nav>

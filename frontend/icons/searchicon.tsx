@@ -7,7 +7,7 @@ export default function SearchIcon() {
             height = "100%"
         >
             <ellipse 
-                style={{stroke: 'rgb(0, 0, 0)', fill: 'rgba(216, 216, 216, 0)', strokeWidth: '40px'}} 
+                style={{stroke: 'rgb(64, 64, 64)', fill: 'rgba(216, 216, 216, 0)', strokeWidth: '40px'}} 
                 cx="206.002" 
                 cy="203.017" 
                 rx="125"
@@ -19,7 +19,7 @@ export default function SearchIcon() {
                 y="437.491" 
                 width="150" 
                 height="40" 
-                style={{stroke: 'rgb(0, 0, 0)', transformOrigin: '131.331px 449.991px'}} 
+                style={{stroke: 'rgb(64, 64, 64)', transformOrigin: '131.331px 449.991px', fill: 'rgb(64,64,64)'}} 
                 transform="matrix(0.707107007504, 0.707107007504, -0.707107007504, 0.707107007504, 223.819636234923, -100.732297464018)"
             />
       </svg>
