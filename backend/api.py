@@ -5,8 +5,7 @@ from dotenv import load_dotenv
 from pydantic import BaseModel
 import os
 
-from vanna.remote import VannaDefault
-from vanna.flask import VannaFlaskApp
+#pip install fastapi
 
 DB_PATH = "test.db"
 app = FastAPI()
@@ -15,14 +14,7 @@ load_dotenv()
 # a function to send the question to the model and return the answer using vanna api
 @app.get("/chat/{question}")
 def chat(question: str):
-
-    vn = VannaDefault(model='ikea', api_key=os.getenv("VANNA_KEY"))
-    vn.connect_to_sqlite("./backend/test.db") 
-
-    query = vn.generate_sql(question)
-    answer = vn.run_sql(query)
-
-    return answer.to_json()
+    return ""
 
 @app.get("/search/{prompt}")
 def search_prompt(prompt: str):
@@ -155,10 +147,4 @@ def register(registerForm: RegisterForm):
     
 
 if __name__ == "__main__":
-
-    if False:
-        vn = VannaDefault(model='ikea', api_key=os.getenv("VANNA_KEY"), )
-        vn.connect_to_sqlite("./backend/test.db", ) 
-        VannaFlaskApp(vn, allow_llm_to_see_data=True).run()
-
     uvicorn.run(app, host="0.0.0.0", port=8000)
