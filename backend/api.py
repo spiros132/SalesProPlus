@@ -1,7 +1,6 @@
 from fastapi import FastAPI, HTTPException
 import uvicorn
 import sqlite3
-from dotenv import load_dotenv
 from pydantic import BaseModel
 import os
 
@@ -9,7 +8,6 @@ import os
 
 DB_PATH = "test.db"
 app = FastAPI()
-load_dotenv() 
 
 # a function to send the question to the model and return the answer using vanna api
 @app.get("/chat/{question}")
