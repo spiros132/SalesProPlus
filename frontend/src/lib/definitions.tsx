@@ -18,8 +18,8 @@ export interface Category {
     parent: number;
 }
 
-/**
- * Product interface, defines the contents of a product.
+/** LEGACY, new interface exists, called Product_Short
+ * Product interface, defines the contents of a product. 
  */
 export interface Product {
     id: number;
@@ -39,6 +39,24 @@ export interface filters {
     stock: number;
     dimensions: dimensions;
 }
+
+/**
+ * The product interface when searching for a product
+**/
+export interface Product_Short {
+    BM25_ProductsFTS: number;
+    articleID: number;
+    name: string;
+    price: number;
+    description: string;
+    unit: string;
+    height: number | null;
+    width: number | null;
+    depth: number | null;
+    length: number | null;
+    packaging: string;
+}
+
 
 /**
  * The product interface when going into the product page itself
