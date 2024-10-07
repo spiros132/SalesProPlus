@@ -40,3 +40,24 @@ export interface filters {
     dimensions: dimensions;
 }
 
+/**
+ * The product interface when going into the product page itself
+**/
+export interface Product_Long {
+    articleID: number;
+    name: string;
+    price: number;
+    description: string;
+    info_description: string;
+    designer: string;
+    info: string;
+    material: string;
+    safety: string;
+    manuals: string;
+    unit: string;
+    height: number | null;
+    width: number | null;
+    depth: number | null;
+    length: number | null;
+    packaging: string;
+}
