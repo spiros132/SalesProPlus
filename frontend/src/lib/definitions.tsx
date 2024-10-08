@@ -2,7 +2,7 @@
  * Dimension interface
  */
 export interface dimensions {
-    length: number;
+    depth: number;
     width: number;
     height: number;
 }

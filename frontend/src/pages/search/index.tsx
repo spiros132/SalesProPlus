@@ -12,7 +12,7 @@ import { searchProducts } from "@/src/api/search/search";
         const [searchResults, setSearchResults] = useState<Product[]>([])
         const searchParams = useSearchParams()
         const [searchQuery, setSearchQuery] = useState(searchParams?.get('q') || '')
-        const [filter, setFilter] = useState<filters>({ category: '', price: 0, stock: 0, dimensions: { length: 0, width: 0, height: 0 } })
+        const [filter, setFilter] = useState<filters>({ category: '', price: 0, stock: 0, dimensions: { depth: 0, width: 0, height: 0 } })
         const [sort, setSort] = useState('')
         
         useEffect(() => {
