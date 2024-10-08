@@ -2,6 +2,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { dimensions, Product } from "@/src/lib/definitions";
 import { products } from "@/src/lib/fakeDB";
+import { CheckBackend } from "@/src/lib/BackendConnection";
 
 export default function Products() {
     const searchParams = useSearchParams();
@@ -18,15 +19,17 @@ export default function Products() {
         if(stock == undefined)
             return <></>;
         else {
-            return <>
-                <p className={"before:inline-block before:mr-1 before:rounded-full before:w-3 before:h-3 before:" + ((stock > 0) ? "bg-green-500" : "bg-red-500")}>
+            return <p className={"before:inline-block before:mr-1 before:rounded-full before:w-3 before:h-3 before:" + ((stock > 0) ? "bg-green-500" : "bg-red-500")}>
                     {stock} in stock
-                </p>
-            </>;
+                </p>;
         }
     }
 
     useEffect(() => {
+        CheckBackend().then((b) => {
+            console.log(b);
+        });
+
         const productID = searchParams?.get("id");
         
         // Check that there is a productID and that it is an integer
