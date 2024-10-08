@@ -2,6 +2,7 @@ import SearchBar from './searchBar'
 import NavBar from './navBar'
 import { ReactNode } from 'react';
 import Head from 'next/head';
+import BottomNavBar from './bottomNavBar';
 
 interface LayoutProps {
     children: ReactNode;
@@ -22,7 +23,7 @@ export default function Layout({ children }: LayoutProps) {
         <main className="flex-grow p-4">
             {children}
         </main>
-        <NavBar/>
+        <BottomNavBar/>
     </div>
     </>)
     }
