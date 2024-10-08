@@ -39,7 +39,7 @@ export function formatProduct(data: any): Promise<Product[]> {
     return data.map((product: any): Product => ({
         ...product,
         dimensions: {
-            length: product.length,
+            depth: product.depth,
             width: product.width,
             height: product.height,
         },
