@@ -66,7 +66,7 @@ export default function Products() {
             <h1 className="text-3xl font-bold">{name}</h1>
             <div className="py-2">
                 <p className="text-sm">{description}</p>
-                <p className="text-sm">{dimensions?.width}x{dimensions?.height}x{dimensions?.depth} cm</p>
+                <p className="text-sm">{dimensions?.length}x{dimensions?.width}x{dimensions?.height} cm</p>
             </div>
             { GetStock(stock) }
             <p className="text-xl font-bold">{price} :-</p>

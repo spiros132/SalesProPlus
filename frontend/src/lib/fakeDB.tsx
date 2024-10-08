@@ -4,10 +4,10 @@ import { Category, Product } from "./definitions";
  * Simple products to test the app without DB connection.
  */
 export const products: Product[] = [
-  { id: 1, name: "Modern Sofa", image: "/assets/categoryassets/1.jpg", price: 899.99, shortdescription: "A modern sofa for your living room.", stock: 10, dimensions: { height: 100, width: 200, depth: 90 } },
-  { id: 2, name: "Leather Armchair", image: "/assets/categoryassets/1.jpg", price: 599.99, shortdescription: "A leather armchair for your living room.", stock: 5, dimensions: { height: 100, width: 100, depth: 100 } },
-  { id: 3, name: "Glass Coffee Table", image: "/assets/categoryassets/1.jpg", price: 299.99, shortdescription: "A glass coffee table for your living room.", stock: 0, dimensions: { height: 50, width: 50, depth: 50 } },
-  { id: 4, name: "Wooden TV Stand", image: "/assets/categoryassets/1.jpg", price: 399.99, shortdescription: "A wooden TV stand for your living room.", stock: 7, dimensions: { height: 50, width: 150, depth: 50 } },
+  { id: 1, name: "Modern Sofa", image: "/assets/categoryassets/1.jpg", price: 899.99, shortdescription: "A modern sofa for your living room.", stock: 10, dimensions: { length: 100, width: 200, height: 90 } },
+  { id: 2, name: "Leather Armchair", image: "/assets/categoryassets/1.jpg", price: 599.99, shortdescription: "A leather armchair for your living room.", stock: 5, dimensions: { length: 100, width: 100, height: 100 } },
+  { id: 3, name: "Glass Coffee Table", image: "/assets/categoryassets/1.jpg", price: 299.99, shortdescription: "A glass coffee table for your living room.", stock: 0, dimensions: { length: 50, width: 50, height: 50 } },
+  { id: 4, name: "Wooden TV Stand", image: "/assets/categoryassets/1.jpg", price: 399.99, shortdescription: "A wooden TV stand for your living room.", stock: 7, dimensions: { length: 50, width: 150, height: 50 } },
   ]
 
 /**

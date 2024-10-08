@@ -10,6 +10,7 @@ import { Product } from '../lib/definitions';
  * @returns a search result object with the product's information.
  */
 export default function SearchResult({ product }: { product: Product }){
+    console.log(product.dimensions)
     return(
         <Link href={`/products/?id=${product.id}`} key={product.id} className="block">
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -28,7 +29,7 @@ export default function SearchResult({ product }: { product: Product }){
                             {product.stock > 0 ? <Check className="h-4 w-4 text-green-700" /> : <X className="text-red-700 h-4 w-4" />}
                             <span className="text-xs">{product.stock} in stock</span>
                         </div>
-                        <h3 className="text-xs">{product.dimensions.height}x{product.dimensions.width}x{product.dimensions.depth}</h3>
+                        <h3 className="text-xs">{product.dimensions.width}x{product.dimensions.length}x{product.dimensions.height}</h3>
                         <p className="text-sm text-gray-600">{product.price.toFixed(2)} kr</p>
                     </div>
                 </div>
