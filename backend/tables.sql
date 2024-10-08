@@ -1,3 +1,9 @@
+DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS Products;
+DROP TABLE IF EXISTS ProductInformation;
+DROP TABLE IF EXISTS ProductDimensions;
+DROP TABLE IF EXISTS ProductsFTS;
+
 CREATE TABLE User (
     username TEXT NOT NULL,
     department TEXT NOT NULL,
@@ -8,6 +14,7 @@ CREATE TABLE Products (
     articleID INT PRIMARY KEY,
     name TEXT NOT NULL,
     price INT NOT NULL,
+    stock INT NOT NULL,
     description TEXT
 );
 

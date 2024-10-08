@@ -52,7 +52,6 @@ def search_prompt(prompt: str):
         """, (prompt,))
     
     result = cursor.fetchall()
-    
     column_names = [description[0] for description in cursor.description]
 
     cursor.close()
