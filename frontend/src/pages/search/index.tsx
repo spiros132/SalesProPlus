@@ -11,28 +11,32 @@ import { searchProducts } from "@/src/api/search/search";
     export default function SearchPage() {
         const [searchResults, setSearchResults] = useState<Product[]>([])
         const searchParams = useSearchParams()
-        const [searchQuery, setSearchQuery] = useState('')
+        const [searchQuery, setSearchQuery] = useState(searchParams?.get('q') || '')
         const [filter, setFilter] = useState<filters>({ category: '', price: 0, stock: 0, dimensions: { length: 0, width: 0, height: 0 } })
         const [sort, setSort] = useState('')
         
         useEffect(() => {
-            if (searchParams?.get('q')) {
-                setSearchQuery(searchParams.get('q') || '')
-                setFilter(searchParams.get('filter') ? JSON.parse(searchParams.get('filter') as string) : {})
-                setSort(searchParams.get('sort') || '')
-                // Handle filters/sorting
-                // API Call 
-                // setSearchResults(data)
-                setSearchResults(searchProducts(searchQuery, filter, sort))
-            } else {
-                setSearchResults([])
-            }
-        }, [searchParams])
+            const fetchData = async () => {
+              if (searchParams && searchParams.get('q')) {
+                const query = searchParams.get('q') || '';
+                const filterParam = searchParams.get('filter') ? JSON.parse(searchParams.get('filter') as string) : {};
+                const sortParam = searchParams.get('sort') || '';
+                setSearchQuery(query);
+                setFilter(filterParam);
+                setSort(sortParam);
+                const results = await searchProducts(query, filterParam, sortParam);
+                setSearchResults(results);
+              } else {
+                setSearchResults([]);
+              }
+            };
+            fetchData();
+          }, [searchParams]);
 
     return(
         <div className="space-y-4">
         {searchResults.map((product) => (
-            <SearchResult product={product} />
+            <SearchResult key={product.id} product={product} />
         ))}
         </div>
     )

@@ -10,7 +10,6 @@ import { Product } from '../lib/definitions';
  * @returns a search result object with the product's information.
  */
 export default function SearchResult({ product }: { product: Product }){
-    console.log(product.dimensions)
     return(
         <Link href={`/products/?id=${product.id}`} key={product.id} className="block">
             <div className="bg-white rounded-lg shadow-md overflow-hidden">

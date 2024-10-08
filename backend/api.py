@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import sqlite3
 from pydantic import BaseModel
@@ -8,6 +9,14 @@ import os
 
 DB_PATH = "test.db"
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # a function to send the question to the model and return the answer using vanna api
 @app.get("/chat/{question}")
@@ -34,7 +43,6 @@ def search_prompt(prompt: str):
         """, (prompt,))
     
     result = cursor.fetchall()
-    
     column_names = [description[0] for description in cursor.description]
 
     cursor.close()
