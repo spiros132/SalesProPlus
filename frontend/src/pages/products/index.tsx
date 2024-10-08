@@ -2,7 +2,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { dimensions, Product } from "@/src/lib/definitions";
 import { products } from "@/src/lib/fakeDB";
-import { CheckBackend } from "@/src/lib/BackendConnection";
+import { CheckBackend, GetProduct } from "@/src/lib/BackendConnection";
 
 export default function Products() {
     const searchParams = useSearchParams();
@@ -26,33 +26,35 @@ export default function Products() {
     }
 
     useEffect(() => {
-        CheckBackend().then((b) => {
-            console.log(b);
-        });
+        function ReturnToHome() {
+            router.push("/");
+        }
 
-        const productID = searchParams?.get("id");
+        const paramsProductID = searchParams?.get("id");
         
         // Check that there is a productID and that it is an integer
-        if(productID === null || !Number.parseInt(productID)) {
+        if(paramsProductID === null || !Number.parseInt(paramsProductID)) {
             // Navigate to the home page
-            router.push("/");
-            return;
+            ReturnToHome();
         }
+        else {
+            const productID = Number.parseInt(paramsProductID);
 
-        // Get all the product information from the database
-        const product: Product | undefined = products.find((product: Product) => product.id == Number.parseInt(productID));
-        
-        // If the productID doesn't exist in our database just return to the home page
-        if(product === undefined) {
-            return;            
+            GetProduct(productID)
+            .then((product) => {
+                if(product == null) {
+                    ReturnToHome();
+                }
+                else {
+                    setName(product.name);
+                    setDescription(product.info_description);
+                    setImage("");
+                    setPrice(product.price);
+                    setStock(product.price);
+                    setDimensions(product.dimensions);
+                }
+            });
         }
-
-        setName(product.name);
-        setDescription(product.shortdescription);
-        setImage(product.image);
-        setPrice(product.price);
-        setStock(product.stock);
-        setDimensions(product.dimensions);
     }, [searchParams]);
 
     return <div>
