@@ -1,11 +1,11 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { dimensions, Product } from "@/src/lib/definitions";
-import { products } from "@/src/lib/fakeDB";
-import { CheckBackend, GetProduct } from "@/src/lib/BackendConnection";
+import { GetProduct } from "@/src/lib/BackendConnection";
 
 export default function Products() {
     const searchParams = useSearchParams();
+    console.log(searchParams);
     const router = useRouter();
 
     const [name, setName] = useState<string>();
@@ -26,11 +26,15 @@ export default function Products() {
     }
 
     useEffect(() => {
+        // Check if the useeffect change is because searchparams exist
+        if(!searchParams)
+            return;
+
+        const paramsProductID = searchParams.get("id");
+        
         function ReturnToHome() {
             router.push("/");
         }
-
-        const paramsProductID = searchParams?.get("id");
         
         // Check that there is a productID and that it is an integer
         if(paramsProductID === null || !Number.parseInt(paramsProductID)) {
@@ -51,7 +55,7 @@ export default function Products() {
                     setImage("");
                     setPrice(product.price);
                     setStock(product.price);
-                    setDimensions(product.dimensions);
+                    setDimensions(product as dimensions);
                 }
             });
         }
