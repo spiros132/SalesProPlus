@@ -10,13 +10,22 @@ import os
 DB_PATH = "test.db"
 app = FastAPI()
 
+origins = [
+    "http://localhost",
+    "http://localhost:3000",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/")
+def check_working():
+    return "Working"
 
 # a function to send the question to the model and return the answer using vanna api
 @app.get("/chat/{question}")
