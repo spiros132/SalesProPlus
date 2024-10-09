@@ -1,6 +1,6 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { dimensions, Product } from "@/src/lib/definitions";
+import { Dimensions, Product } from "@/src/lib/definitions";
 import { GetProduct } from "@/src/lib/BackendConnection";
 
 export default function Products() {
@@ -13,7 +13,7 @@ export default function Products() {
     const [image, setImage] = useState<string>();
     const [price, setPrice] = useState<number>();
     const [stock, setStock] = useState<number>();
-    const [dimensions, setDimensions] = useState<dimensions>();
+    const [dimensions, setDimensions] = useState<Dimensions>();
     
     function GetStock(stock: number | undefined) {
         if(stock == undefined)
@@ -55,7 +55,7 @@ export default function Products() {
                     setImage("");
                     setPrice(product.price);
                     setStock(product.price);
-                    setDimensions(product as dimensions);
+                    setDimensions(product as Dimensions);
                 }
             });
         }
