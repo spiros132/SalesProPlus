@@ -1,7 +1,7 @@
 /**
  * Dimension interface
  */
-export interface dimensions {
+export interface Dimensions {
     depth: number;
     width: number;
     height: number;
@@ -28,16 +28,26 @@ export interface Product {
     price: number;
     shortdescription: string;
     stock: number;
-    dimensions: dimensions;
+    dimensions: Dimensions;
 }
+
 /**
- * Filter interface, defines the contents of a filter.
+ * Filter interface for sending the url and getting the whole string of values.
  */
-export interface filters {
-    category: string;
-    price: number;
-    stock: number;
-    dimensions: dimensions;
+export class Filters {
+    Filters(filters: Filter[]) {
+        filters.forEach((filter) => {
+            this.filterSearch += `${filter.name}=${filter.value}&`;
+        });
+    }
+
+    filterSearch: string = "";
+}
+
+/* Filter interface for one kind of filter*/
+export interface Filter {
+    name: string;
+    value: any;
 }
 
 /**

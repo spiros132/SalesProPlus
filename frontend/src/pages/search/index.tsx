@@ -1,6 +1,6 @@
 import {  useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
-import { Product, filters } from "../../lib/definitions";
+import { Product, Filters } from "../../lib/definitions";
 import SearchResult from "../../components/searchResult"
 import { searchProducts } from "@/src/api/search/search";
 
@@ -12,7 +12,7 @@ import { searchProducts } from "@/src/api/search/search";
         const [searchResults, setSearchResults] = useState<Product[]>([])
         const searchParams = useSearchParams()
         const [searchQuery, setSearchQuery] = useState(searchParams?.get('q') || '')
-        const [filter, setFilter] = useState<filters>({ category: '', price: 0, stock: 0, dimensions: { depth: 0, width: 0, height: 0 } })
+        //const [filter, setFilter] = useState<Filters>({ category: '', price: 0, stock: 0, dimensions: { depth: 0, width: 0, height: 0 } })
         const [sort, setSort] = useState('')
         
         useEffect(() => {
@@ -22,7 +22,7 @@ import { searchProducts } from "@/src/api/search/search";
                 const filterParam = searchParams.get('filter') ? JSON.parse(searchParams.get('filter') as string) : {};
                 const sortParam = searchParams.get('sort') || '';
                 setSearchQuery(query);
-                setFilter(filterParam);
+                //setFilter(filterParam);
                 setSort(sortParam);
                 const results = await searchProducts(query, filterParam, sortParam);
                 setSearchResults(results);
