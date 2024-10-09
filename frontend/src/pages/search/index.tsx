@@ -1,6 +1,6 @@
 import {  useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
-import { Product, Filters } from "../../lib/definitions";
+import { Product, Filters, Product_Short } from "../../lib/definitions";
 import SearchResult from "../../components/searchResult"
 import { searchProducts } from "@/src/api/search/search";
 
@@ -9,7 +9,7 @@ import { searchProducts } from "@/src/api/search/search";
      * @returns row-formatted search results, based on url parameters.
      */
     export default function SearchPage() {
-        const [searchResults, setSearchResults] = useState<Product[]>([])
+        const [searchResults, setSearchResults] = useState<Product_Short[]>([])
         const searchParams = useSearchParams()
         const [searchQuery, setSearchQuery] = useState(searchParams?.get('q') || '')
         //const [filter, setFilter] = useState<Filters>({ category: '', price: 0, stock: 0, dimensions: { depth: 0, width: 0, height: 0 } })
@@ -43,7 +43,7 @@ import { searchProducts } from "@/src/api/search/search";
         ) : (
           <div className="space-y-4">
               {searchResults.map((product) => (
-                  <SearchResult key={product.id} product={product} />
+                  <SearchResult key={product.articleID} product={product} />
               ))}
           </div>
         )}

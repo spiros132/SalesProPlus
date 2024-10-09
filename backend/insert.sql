@@ -6,32 +6,31 @@ INSERT INTO Products VALUES (
     "Klockan IKEA PS 1995 visar tiden och är också en iögonfallande dekoration i ditt hem. Du kan hänga den på väggen eller ställa den på en hylla – och öppna fronten på klockan och förvara småsaker."
 );
 
-insert into ProductCategories (categoryID, category) values 
-    ("sovrum", NULL), 
-    ("bed", "sovrum"), 
-    ("lamp", "sovrum");
+insert into ProductCategories (categoryID, categoryName, parent) values 
+    ("sovrum", "Sovrum", NULL), 
+    ("bed", "Beds", "sovrum"), 
+    ("lamp", "Lamps",  "sovrum");
 
-insert into Material (name, country, emission) values (
+insert into Materials (name, country, emission) values (
     "Stål", 
     "Sverige", 
     1
 );
 
-
-insert into ProductMaterials (material, articleId) values (
-    "Stål", 
+insert into ProductMaterials (material, part, articleId) values (
+    "Stål",
+    "ram",
     10575064
 );
 
 INSERT INTO ProductInformation (
-    ProductID, 
-    Description, 
+    articleID, 
+    info_description, 
     Designer, 
-    AdditionalInfo, 
-    Material, 
-    Category
-    Certification, 
-    ManualURL
+    info, 
+    category,
+    safety, 
+    manuals
 ) VALUES (
     10575064, 
     "Klockan är även en bra förvaringsplats för småsaker. Inga störande tickande ljud, eftersom klockan har ett tyst kvartsurverk. Kan hängas på väggen eller ställas på en hylla. Visar tiden exakt, eftersom den är utrustad med ett quartzurverk.", 
@@ -43,19 +42,21 @@ INSERT INTO ProductInformation (
 );
 
 INSERT INTO ProductDimensions (
-    ProductID, 
+    articleID, 
     Unit, 
     Height, 
     Width, 
-    Length, 
-    Weight, 
+    depth,
+    length, 
+    weight, 
     Packaging
 ) VALUES (
     10575064, 
     "CM", 
     15, 
     48, 
+    23,
     29, 
-    NULL, 
+    3.40,
     "bredd: 30 cm  Höjd: 15 cm  Längd: 49 cm  Vikt: 3.40 kg  Förpackning(ar): 1"
 );

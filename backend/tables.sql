@@ -3,28 +3,14 @@ DROP TABLE IF EXISTS Products;
 DROP TABLE IF EXISTS ProductInformation;
 DROP TABLE IF EXISTS ProductDimensions;
 DROP TABLE IF EXISTS ProductsFTS;
+DROP TABLE IF EXISTS ProductCategories;
+DROP TABLE IF EXISTS ProductMaterials;
+DROP TABLE IF EXISTS Materials;
 
 CREATE TABLE User (
     username TEXT NOT NULL,
     department TEXT NOT NULL,
     region TEXT NOT NULL
-);
-
-create table ProductCategories (
-    name TEXT PRIMARY KEY,
-    parent TEXT REFERENCES ProductCategories(name) on delete cascade,
-);
-
-create table Materials (
-    name TEXT PRIMARY KEY,
-    country TEXT,
-    emission int,
-);
-
-create table ProductMaterials (
-    material TEXT REFERENCES Materials(name),
-    FOREIGN KEY (articleID) REFERENCES Products(articleID),
-    primary key (material, articleID)
 );
 
 CREATE TABLE Products (
@@ -33,6 +19,18 @@ CREATE TABLE Products (
     price INT NOT NULL,
     stock INT NOT NULL,
     description TEXT
+);
+
+create table ProductCategories (
+    categoryID TEXT PRIMARY KEY,
+    categoryName TEXT NOT NULL,
+    parent TEXT REFERENCES ProductCategories(categoryID) on delete cascade
+);
+
+create table Materials (
+    name TEXT PRIMARY KEY,
+    country TEXT,
+    emission int
 );
 
 CREATE TABLE ProductInformation (
@@ -53,8 +51,16 @@ CREATE TABLE ProductDimensions (
     width INT,
     depth INT,
     length INT,
+    weight INT,
     packaging TEXT,
     FOREIGN KEY (articleID) REFERENCES Products(articleID)
+);
+
+CREATE TABLE ProductMaterials (
+    material TEXT REFERENCES Materials(name),
+    articleID INT REFERENCES Products(articleID),
+    part TEXT NOT NULL,
+    PRIMARY KEY (material, articleID)
 );
 
 CREATE VIRTUAL TABLE ProductsFTS USING fts5 (

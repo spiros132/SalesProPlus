@@ -28,9 +28,6 @@ app.add_middleware(
 def check_working():
     return "Working"
 
-
-
-
 @app.get("/chat/{question}")
 def chat(question: str):
     return ""
@@ -146,6 +143,7 @@ def product_page(id: int):
         LEFT JOIN ProductDimensions pd ON p.articleID = pd.articleID
         left join ProductMaterials pm on p.articleID = pm.articleID
         WHERE p.articleID = ?
+        GROUP BY p.articleID;
         """, (id,))
     
     result = cursor.fetchone()
@@ -154,6 +152,7 @@ def product_page(id: int):
 
     cursor.close()
     db.close()
+    
     
     if result:
         return dict(zip(column_names, result))

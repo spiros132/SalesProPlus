@@ -1,5 +1,5 @@
 import { format } from 'path';
-import { Category, Filters, Product } from '../../lib/definitions';
+import { Category, Filters, Product, Product_Short } from '../../lib/definitions';
 import { products, categories } from '../../lib/fakeDB';
 
 
@@ -9,7 +9,7 @@ import { products, categories } from '../../lib/fakeDB';
  * @param searchQuery the query to search for.
  * @returns an array of products that match the query.
  */
-export async function searchProducts(searchQuery: string, filters: Filters, sort: string): Promise<Product[]> {
+export async function searchProducts(searchQuery: string, filters: Filters, sort: string): Promise<Product_Short[]> {
     //testAPI();
     try {
         const url = new URL('http://localhost:8000/search/' + searchQuery + '/');
@@ -35,7 +35,7 @@ export async function searchProducts(searchQuery: string, filters: Filters, sort
     }
 }
 
-export function formatProduct(data: any): Promise<Product[]> {
+export function formatProduct(data: any): Promise<Product_Short[]> {
     return data.map((product: any): Product => ({
         ...product,
         dimensions: {
