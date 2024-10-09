@@ -28,6 +28,19 @@ export default function Startpage() {
       setCarouselIndex(0)
     }
 
+    const filteredCategories = selectedCategory ? categories.filter(category => {
+      // Check if the selected category has sub-categories
+      const hasSubCategories = categories.some(subCategory => subCategory.parent === selectedCategory.id);
+    
+      if (hasSubCategories) {
+        // Show sub-categories of the selected category
+        return category.parent === selectedCategory.id;
+      } else {
+        // Show categories with the same parent as the selected category
+        return category.parent === selectedCategory.parent;
+      }
+    }) : [];
+
     /**
      * This handles the creation of the grid object and it's content.
      * @param items the categories shown in the grid.
@@ -69,11 +82,11 @@ export default function Startpage() {
       return (
       <div className="relative mt-4 border-b-2 border-t-2">
         <div className="flex overflow-x-auto scrollbar-hide space-x-2 p-2" onDragStart={handleDragStart}>
-        {selectedCategory && categories.filter(category => category.parent === selectedCategory.id).map((subcategory, index) => (
+        {selectedCategory &&  filteredCategories.map((subcategory, index) => (
           <div 
           key={subcategory.id}
           className={`flex-none w-1/4 bg-white overflow-hidden cursor-pointer 
-            ${index === carouselIndex ? 'shadow-md' : ''}`}
+            ${subcategory.id == selectedCategory.id ? 'shadow-md' : ''}`}
           onClick={() => handleCategoryClick(subcategory.id)}
           >
           <Image
@@ -119,7 +132,7 @@ export default function Startpage() {
       )}
       {selectedCategory && selectedCategory.products ? (<>{renderCarousel()}{renderProducts()}</>)
       : 
-      (renderGrid(selectedCategory ? categories.filter(category => category.parent === selectedCategory.id) : categories.filter(category => category.parent === 0)))}
+      (renderGrid(selectedCategory ? filteredCategories : categories.filter(category => category.parent === 0)))}
     </div>
   )
 }

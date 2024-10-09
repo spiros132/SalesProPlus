@@ -50,7 +50,6 @@ export default function SearchBar() {
                     </button>
                     )}
                 </div>
-                <Filter className="h-full w-auto p-2" />
             </form>
         </header>
     )

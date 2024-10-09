@@ -33,11 +33,20 @@ import { searchProducts } from "@/src/api/search/search";
             fetchData();
           }, [searchParams]);
 
-    return(
-        <div className="space-y-4">
-        {searchResults.map((product) => (
-            <SearchResult key={product.id} product={product} />
-        ))}
-        </div>
+    return (
+      <>
+        {searchResults.length === 0 ? (
+          <div className="text-center">
+              <h2 className="text-2xl font-semibold">No results found</h2>
+              <p className="text-gray-500">Try searching for something else</p>
+          </div>  
+        ) : (
+          <div className="space-y-4">
+              {searchResults.map((product) => (
+                  <SearchResult key={product.id} product={product} />
+              ))}
+          </div>
+        )}
+      </>
     )
 }

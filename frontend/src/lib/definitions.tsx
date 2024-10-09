@@ -48,6 +48,8 @@ export interface Product_Short {
     articleID: number;
     name: string;
     price: number;
+    stock: number;
+    image: string;
     description: string;
     unit: string;
     height: number | null;
@@ -66,6 +68,8 @@ export interface Product_Long {
     articleID: number;
     name: string;
     price: number;
+    stock: number;
+    image: string;
     description: string;
     info_description: string;
     designer: string;
