@@ -33,7 +33,7 @@ export default function Products() {
         const paramsProductID = searchParams?.get("id");
         
         // Check that there is a productID and that it is an integer
-        if(paramsProductID === null || !Number.parseInt(paramsProductID)) {
+        if(paramsProductID === null || paramsProductID === undefined || !Number.parseInt(paramsProductID)) {
             // Navigate to the home page
             ReturnToHome();
         }
@@ -51,7 +51,11 @@ export default function Products() {
                     setImage("");
                     setPrice(product.price);
                     setStock(product.price);
-                    setDimensions(product.dimensions);
+                    setDimensions({
+                        height: product.height ?? 0,
+                        width: product.width ?? 0,
+                        depth: product.depth ?? 0
+                    });
                 }
             });
         }
