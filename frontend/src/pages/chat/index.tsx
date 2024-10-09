@@ -48,12 +48,11 @@ export default function Chat() {
     useEffect(() => {
         const chatContainer = chatContainerRef.current;
         if (chatContainer) {
-            // Using a timeout to ensure messages are fully rendered
             const timeoutId = setTimeout(() => {
                 chatContainer.scrollTop = chatContainer.scrollHeight;
-            }, 0); // Adjust delay if necessary
+            }, 0);
 
-            return () => clearTimeout(timeoutId); // Cleanup on unmount
+            return () => clearTimeout(timeoutId);
         }
     }, [chat]);
 
