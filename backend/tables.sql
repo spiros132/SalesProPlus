@@ -10,6 +10,22 @@ CREATE TABLE User (
     region TEXT NOT NULL
 );
 
+create table ProductCategories (
+    name TEXT PRIMARY KEY
+);
+
+create table Materials (
+    name TEXT PRIMARY KEY,
+    country TEXT,
+    emission int,
+);
+
+create table ProductMaterials (
+    material TEXT REFERENCES Materials(name),
+    FOREIGN KEY (articleID) REFERENCES Products(articleID),
+    primary key (material, articleID)
+);
+
 CREATE TABLE Products (
     articleID INT PRIMARY KEY,
     name TEXT NOT NULL,
@@ -23,7 +39,7 @@ CREATE TABLE ProductInformation (
     info_description TEXT,
     designer TEXT,
     info TEXT,
-    material TEXT,
+    category text REFERENCES ProductCategories(categoryID),
     safety TEXT,
     manuals TEXT,
     FOREIGN KEY (articleID) REFERENCES Products(articleID)
