@@ -6,7 +6,6 @@ import { GetProduct } from "@/src/lib/BackendConnection";
 export default function Products() {
     const searchParams = useSearchParams();
     console.log(searchParams);
-    const router = useRouter();
 
     const [name, setName] = useState<string>();
     const [description, setDescription] = useState<string>();
@@ -32,33 +31,22 @@ export default function Products() {
 
         const paramsProductID = searchParams.get("id");
         
-        function ReturnToHome() {
-            router.push("/");
-        }
-        
-        // Check that there is a productID and that it is an integer
-        if(paramsProductID === null || paramsProductID === undefined || !Number.parseInt(paramsProductID)) {
-            // Navigate to the home page
-            ReturnToHome();
-        }
-        else {
-            const productID = Number.parseInt(paramsProductID);
+        const productID = Number.parseInt(paramsProductID);
 
-            GetProduct(productID)
-            .then((product) => {
-                if(product == null) {
-                    ReturnToHome();
-                }
-                else {
-                    setName(product.name);
-                    setDescription(product.info_description);
-                    setImage("");
-                    setPrice(product.price);
-                    setStock(product.price);
-                    setDimensions(product as Dimensions);
-                }
-            });
-        }
+        GetProduct(productID)
+        .then((product) => {
+            if(product == null) {
+            }
+            else {
+                setName(product.name);
+                setDescription(product.info_description);
+                setImage("");
+                setPrice(product.price);
+                setStock(product.price);
+                setDimensions(product as Dimensions);
+            }
+        });
+        
     }, [searchParams]);
 
     return <div>
