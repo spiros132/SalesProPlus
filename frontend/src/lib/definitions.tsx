@@ -62,6 +62,7 @@ export interface Product_Short {
  * The product interface when going into the product page itself
 **/
 export interface Product_Long {
+    dimensions(dimensions: any): unknown;
     articleID: number;
     name: string;
     price: number;

@@ -1,9 +1,10 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import sqlite3
 from pydantic import BaseModel
 import os
+from typing import Optional, Tuple
 
 #pip install fastapi
 
@@ -32,14 +33,26 @@ def check_working():
 def chat(question: str):
     return ""
 
+class Filter(BaseModel):
+    min_price: Optional[int] = None
+    max_price: Optional[int] = None
+    min_height: Optional[int] = None
+    max_height: Optional[int] = None
+    min_width: Optional[int] = None
+    max_width: Optional[int] = None
+    min_depth: Optional[int] = None
+    max_depth: Optional[int] = None
+    min_length: Optional[int] = None
+    max_length: Optional[int] = None
+
+
 @app.get("/search/{prompt}")
-def search_prompt(prompt: str):
+def search_prompt(prompt: str, filters: Filter = Depends()):
 
     db = sqlite3.connect(DB_PATH)
-
     cursor = db.cursor()
-    # name, price, dimensions, description
-    cursor.execute("""
+
+    query = """
         SELECT
             BM25(ProductsFTS),
             p.*,
@@ -48,8 +61,53 @@ def search_prompt(prompt: str):
         LEFT JOIN ProductDimensions pd ON p.articleID = pd.articleID
         JOIN ProductsFTS s ON p.articleID = s.articleID 
         WHERE ProductsFTS MATCH ?
-        ORDER BY BM25(ProductsFTS)
-        """, (prompt,))
+    """
+
+    params = [prompt]
+
+ 
+    if filters.min_price:
+        query += " AND p.price >= ?"
+        params.append(filters.min_price)
+    if filters.max_price:
+        query += " AND p.price <= ?"
+        params.append(filters.max_price)
+    
+
+    if filters.min_height:
+        query += " AND pd.height >= ?"
+        params.append(filters.min_height)
+    if filters.max_height:
+        query += " AND pd.height <= ?"
+        params.append(filters.max_height)
+
+
+    if filters.min_width:
+        query += " AND pd.width >= ?"
+        params.append(filters.min_width)
+    if filters.max_width:
+        query += " AND pd.width <= ?"
+        params.append(filters.max_width)
+
+
+    if filters.min_depth is not None:
+        query += " AND pd.depth >= ?"
+        params.append(filters.min_depth)
+    if filters.max_depth is not None:
+        query += " AND pd.depth <= ?"
+        params.append(filters.max_depth)
+    
+
+    if filters.min_length is not None:
+        query += " AND pd.length >= ?"
+        params.append(filters.min_length)
+    if filters.max_length is not None:
+        query += " AND pd.length <= ?"
+        params.append(filters.max_length)
+
+    query += " ORDER BY BM25(ProductsFTS)"
+    
+    cursor.execute(query, tuple(params))
     
     result = cursor.fetchall()
     column_names = [description[0] for description in cursor.description]
@@ -71,9 +129,9 @@ def product_page(id: int):
             pi.info_description, 
             pi.designer, 
             pi.info, 
-            pi.material, 
             pi.safety, 
             pi.manuals, 
+            pi.category,
             pd.unit,
             pd.height,
             pd.width,

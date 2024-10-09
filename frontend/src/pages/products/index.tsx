@@ -37,7 +37,7 @@ export default function Products() {
         }
         
         // Check that there is a productID and that it is an integer
-        if(paramsProductID === null || !Number.parseInt(paramsProductID)) {
+        if(paramsProductID === null || paramsProductID === undefined || !Number.parseInt(paramsProductID)) {
             // Navigate to the home page
             ReturnToHome();
         }
