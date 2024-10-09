@@ -11,7 +11,8 @@ CREATE TABLE User (
 );
 
 create table ProductCategories (
-    name TEXT PRIMARY KEY
+    name TEXT PRIMARY KEY,
+    parent TEXT REFERENCES ProductCategories(name),
 );
 
 create table Materials (
