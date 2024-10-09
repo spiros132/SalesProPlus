@@ -6,13 +6,17 @@ INSERT INTO Products VALUES (
     "Klockan IKEA PS 1995 visar tiden och är också en iögonfallande dekoration i ditt hem. Du kan hänga den på väggen eller ställa den på en hylla – och öppna fronten på klockan och förvara småsaker."
 );
 
-insert into ProductCategories (categoryID, category) values (1, "sovrum", Null);
+insert into ProductCategories (categoryID, category) values 
+    ("sovrum", NULL), 
+    ("bed", "sovrum"), 
+    ("lamp", "sovrum");
 
 insert into Material (name, country, emission) values (
     "Stål", 
     "Sverige", 
     1
 );
+
 
 insert into ProductMaterials (material, articleId) values (
     "Stål", 

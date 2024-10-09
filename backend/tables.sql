@@ -12,7 +12,7 @@ CREATE TABLE User (
 
 create table ProductCategories (
     name TEXT PRIMARY KEY,
-    parent TEXT REFERENCES ProductCategories(name),
+    parent TEXT REFERENCES ProductCategories(name) on delete cascade,
 );
 
 create table Materials (

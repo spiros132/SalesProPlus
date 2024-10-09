@@ -28,7 +28,9 @@ app.add_middleware(
 def check_working():
     return "Working"
 
-# a function to send the question to the model and return the answer using vanna api
+
+
+
 @app.get("/chat/{question}")
 def chat(question: str):
     return ""
@@ -160,6 +162,19 @@ def product_page(id: int):
 
 class LoginForm(BaseModel):
     username: str
+
+@app.get("/categories")
+def categories():
+    db = sqlite3.connect(DB_PATH)
+    cursor = db.cursor()
+    cursor.execute("""
+        SELECT DISTINCT category
+        FROM ProductInformation
+    """)
+    result = cursor.fetchall()
+    cursor.close()
+    db.close()
+    return [row[0] for row in result]
 
 @app.post("/login")
 def login(loginForm: LoginForm):
