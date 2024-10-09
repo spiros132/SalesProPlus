@@ -17,7 +17,9 @@ module.exports = {
       colors: {
         activeNavGray: 'rgb(213, 213, 213)',
         navBorderGray: 'rgb(225,225,225)',
-        iconGray: 'rgb(64,64,64)'
+        iconGray: 'rgb(64,64,64)',
+        chatBgGray: 'rgb(231,231,231)',
+        chatFontGray: 'rgb(83,83,83)',
       }
     },
   },
