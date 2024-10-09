@@ -137,10 +137,12 @@ def product_page(id: int):
             pd.width,
             pd.depth,
             pd.length,
-            pd.packaging
+            pd.packaging,
+            GROUP_CONCAT(pm.material, ', ') AS materials
         FROM Products p
         LEFT JOIN ProductInformation pi ON p.articleID = pi.articleID
         LEFT JOIN ProductDimensions pd ON p.articleID = pd.articleID
+        left join ProductMaterials pm on p.articleID = pm.articleID
         WHERE p.articleID = ?
         """, (id,))
     
