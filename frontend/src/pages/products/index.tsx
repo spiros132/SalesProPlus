@@ -31,11 +31,15 @@ export default function Products() {
 
         const paramsProductID = searchParams.get("id");
         
+        if(paramsProductID == null)
+            return;
+
         const productID = Number.parseInt(paramsProductID);
 
         GetProduct(productID)
         .then((product) => {
             if(product == null) {
+                // Reset or go back to the main page
             }
             else {
                 setName(product.name);
@@ -62,7 +66,9 @@ export default function Products() {
                 <p className="text-sm">{description}</p>
                 <p className="text-sm">{dimensions?.depth}x{dimensions?.width}x{dimensions?.height} cm</p>
             </div>
-            { GetStock(stock) }
+            <p className={"before:inline-block before:mr-1 before:rounded-full before:w-3 before:h-3 before:" + ((stock != null && stock > 0) ? "bg-green-500" : "bg-red-500")}>
+                {stock} in stock
+            </p>
             <p className="text-xl font-bold">{price} :-</p>
         </div>
     </div>;
