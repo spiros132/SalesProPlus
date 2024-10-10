@@ -44,9 +44,9 @@ export default function Products() {
             else {
                 setName(product.name);
                 setDescription(product.info_description);
-                setImage("");
+                setImage(product.image);
                 setPrice(product.price);
-                setStock(product.price);
+                setStock(product.stock);
                 setDimensions(product as Dimensions);
             }
         });
@@ -61,15 +61,15 @@ export default function Products() {
 
         {/* Description */}
         <div className="p-5">
-            <h1 className="text-3xl font-bold">{name}</h1>
+            <h1 className="text-3xl font-bold mx-auto">{name}</h1>
             <div className="py-2">
-                <p className="text-sm">{description}</p>
-                <p className="text-sm">{dimensions?.depth}x{dimensions?.width}x{dimensions?.height} cm</p>
+                <p className="text-md">{description}</p>
+                <p className="text-md">{dimensions?.depth}x{dimensions?.width}x{dimensions?.height} cm</p>
             </div>
             <p className={"before:inline-block before:mr-1 before:rounded-full before:w-3 before:h-3 before:" + ((stock != null && stock > 0) ? "bg-green-500" : "bg-red-500")}>
                 {stock} in stock
             </p>
-            <p className="text-xl font-bold">{price} :-</p>
+            <p className="text-xl font-bold">{price} kr</p>
         </div>
     </div>;
 }

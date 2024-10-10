@@ -2,9 +2,10 @@
  * Dimension interface
  */
 export interface Dimensions {
-    depth: number;
-    width: number;
-    height: number;
+    depth: number | null;
+    width: number | null;
+    height: number | null;
+    length: number | null;
 }
 
 /**
@@ -84,7 +85,7 @@ export interface Product_Long {
     info_description: string;
     designer: string;
     info: string;
-    material: string;
+    materials: string;
     safety: string;
     manuals: string;
     unit: string;
