@@ -83,6 +83,7 @@ export interface Product_Long {
     image: string;
     description: string;
     info_description: string;
+    category: string;
     designer: string;
     info: string;
     materials: string;
