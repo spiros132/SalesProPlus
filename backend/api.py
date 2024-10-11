@@ -64,7 +64,7 @@ def search_prompt(q: Optional[str] = None, filters: Filter = Depends()):
     """
     params = []
 
-    if q is not None:
+    if q is not None and q != "":
         query += "WHERE ProductsFTS MATCH ?"
         params.append(q)
 
