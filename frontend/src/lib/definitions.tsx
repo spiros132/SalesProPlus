@@ -12,11 +12,9 @@ export interface Dimensions {
  * Category interface, defines the contents of a category.
  */
 export interface Category {
-    id: number;
-    name: string;
-    image: string;
-    products: number[] | null;
-    parent: number;
+    categoryID: string;
+    categoryName: string;
+    parent: string | null;
 }
 
 /** LEGACY, new interface exists, called Product_Short
@@ -36,7 +34,7 @@ export interface Product {
  * Filter interface for sending the url and getting the whole string of values.
  */
 export class Filters {
-    Filters(filters: Filter[]) {
+    constructor(filters: Filter[]) {
         filters.forEach((filter) => {
             this.filterSearch += `${filter.name}=${filter.value}&`;
         });

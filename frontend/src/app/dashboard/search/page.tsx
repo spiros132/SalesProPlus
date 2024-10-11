@@ -28,8 +28,8 @@ export default function SearchPage() {
       
       //setFilter(filterParam);
       //setSort(sortParam);
-      
-      SearchProducts(query, new Filters())
+      // Fix so that we can have a certain sort or filters
+      SearchProducts(query, new Filters([]))
       .then((results) => {
         // We have gotten our results back
         setIsLoaded(true);
