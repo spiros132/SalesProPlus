@@ -36,7 +36,7 @@ export default function CategoriesComponent(
                 setIsLoaded(true);
             }
         });
-    });
+    }, [parent]);
 
     return (
         <Skeleton isLoaded={isLoaded}>

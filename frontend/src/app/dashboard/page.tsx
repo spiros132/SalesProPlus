@@ -8,6 +8,7 @@ import CategoryProduct from '@/src/app/dashboard/_dashboardComponents/categoryPr
 import { GetCategory } from '@/src/lib/BackendConnection';
 import CategoryComponent from './_dashboardComponents/categoryComponent';
 import CategoriesComponent from './_dashboardComponents/categories';
+import CategoryProducts from './_dashboardComponents/categoryProducts';
 // replace with api
 
 /**
@@ -99,6 +100,8 @@ export default function Startpage() {
   return (
     <div className="space-y-6">
       {CategoriesComponent({parent: selectedCategory, setCategory: changeCategory})}
+
+      {CategoryProducts({category: selectedCategory})}
 
       {/*selectedCategory && selectedCategory.products ? (<>{renderCarousel()}{RenderProducts()}</>)
       : 

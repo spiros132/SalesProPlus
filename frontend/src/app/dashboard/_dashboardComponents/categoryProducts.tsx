@@ -28,7 +28,7 @@ export default function CategoryProducts({
             if(products != null)
                 setProducts(products);
         });
-    }, []);
+    }, [category]);
 
     return (
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
