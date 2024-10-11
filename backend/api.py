@@ -178,6 +178,23 @@ def categories():
 
     return [dict(zip(column_names, row)) for row in result]
 
+@app.get("/categories/{id}")
+def categories(id: str):
+    db = sqlite3.connect(DB_PATH)
+    cursor = db.cursor()
+    cursor.execute("""
+        SELECT *
+        FROM ProductCategories c
+        WHERE c.categoryID = ?
+    """, (id,))
+    result = cursor.fetchone()
+    cursor.close()
+    db.close()
+
+    column_names = [description[0] for description in cursor.description]
+
+    return dict(zip(column_names, result))
+
 @app.post("/login")
 def login(loginForm: LoginForm):
 
