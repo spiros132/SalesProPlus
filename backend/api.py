@@ -46,8 +46,8 @@ class Filter(BaseModel):
     category: Optional[str] = None
 
 
-@app.get("/search/{prompt}")
-def search_prompt(prompt: str, filters: Filter = Depends()):
+@app.get("/search")
+def search_prompt(q: Optional[str] = None, filters: Filter = Depends()):
 
     db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
@@ -61,10 +61,12 @@ def search_prompt(prompt: str, filters: Filter = Depends()):
         LEFT JOIN ProductDimensions pd ON p.articleID = pd.articleID
         LEFT JOIN ProductInformation pi ON p.articleID = pi.articleID
         JOIN ProductsFTS s ON p.articleID = s.articleID 
-        WHERE ProductsFTS MATCH ?
     """
+    params = []
 
-    params = [prompt]
+    if q is not None:
+        query += "WHERE ProductsFTS MATCH ?"
+        params.append(q)
 
  
     if filters.min_price:
