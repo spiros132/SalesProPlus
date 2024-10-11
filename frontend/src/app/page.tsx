@@ -5,7 +5,7 @@ import { Button } from "@nextui-org/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-
+/* Main page which should be the login page */
 export default function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");

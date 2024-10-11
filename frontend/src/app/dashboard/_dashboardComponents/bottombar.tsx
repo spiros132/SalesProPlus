@@ -15,7 +15,7 @@ export default function BottomNavBar() {
     const pathName = usePathname();
 
     return (
-        <nav className="fixed flex bottom-0 left-0 right-0 bg-white text-black, h-[12vh] border-t-3 border-navBorderGray">
+        <nav className="sticky flex bottom-0 left-0 right-0 bg-white text-black, h-[12vh] border-t-3 border-navBorderGray">
             {/* Dashboard */}
             <div className="flex flex-1 h-full items-center justify-center">
                 <Link className={`h-[10vh] w-[10vh] rounded-[35%] flex flex-col items-center justify-center text-black hover:bg-activeNavGray

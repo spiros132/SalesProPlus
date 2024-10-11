@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { products } from '../../lib/fakeDB'
 import { categories } from '../../lib/fakeDB'
 import { Category } from '@/src/lib/definitions'
-import CategoryProduct from '@/src/app/dashboard/_dashboardComponents/categoryProduct'
+import DashboardProduct from '@/src/app/dashboard/_dashboardComponents/dashboardProduct'
 // replace with api
 
 /**
@@ -113,7 +113,7 @@ export default function Startpage() {
         {selectedCategory && selectedCategory.products && selectedCategory.products.map((productId) => {
           const product = products.find(p => p.id === productId);
           return product ? (
-            <CategoryProduct key={product.id} product={product} />
+            <DashboardProduct key={product.id} product={product} />
           ) : null;
         })}
       </div>

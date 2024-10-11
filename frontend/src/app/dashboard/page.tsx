@@ -7,7 +7,7 @@ import { useState } from 'react'
 import { products } from '../../lib/fakeDB'
 import { categories } from '../../lib/fakeDB'
 import { Category } from '@/src/lib/definitions'
-import CategoryProduct from '@/src/app/dashboard/_dashboardComponents/categoryProduct'
+import DashboardProduct from '@/src/app/dashboard/_dashboardComponents/dashboardProduct'
 // replace with api
 
 /**
@@ -110,16 +110,18 @@ export default function Startpage() {
      * This handles the creation of the products object and it's content.
      * @returns a grid of products.
      */
-    const renderProducts = () => (
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+    function RenderProducts() {
+      return (<div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
         {selectedCategory && selectedCategory.products && selectedCategory.products.map((productId) => {
           const product = products.find(p => p.id === productId);
-          return product ? (
-            <CategoryProduct key={product.id} product={product} />
-          ) : null;
+          if(product == undefined)
+            return null;
+          else
+            return (<DashboardProduct key={product.id} product={product} />);
         })}
-      </div>
-    )
+      </div>);
+    }
+    
     
   return (
     <div className="space-y-6">
@@ -132,7 +134,7 @@ export default function Startpage() {
       Back
       </button>
       )}
-      {selectedCategory && selectedCategory.products ? (<>{renderCarousel()}{renderProducts()}</>)
+      {selectedCategory && selectedCategory.products ? (<>{renderCarousel()}{RenderProducts()}</>)
       : 
       (renderGrid(selectedCategory ? filteredCategories : categories.filter(category => category.parent === 0)))}
     </div>
