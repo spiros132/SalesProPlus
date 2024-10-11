@@ -167,13 +167,16 @@ def categories():
     db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     cursor.execute("""
-        SELECT DISTINCT category
-        FROM ProductInformation
+        SELECT *
+        FROM ProductCategories
     """)
     result = cursor.fetchall()
     cursor.close()
     db.close()
-    return [row[0] for row in result]
+
+    column_names = [description[0] for description in cursor.description]
+
+    return [dict(zip(column_names, row)) for row in result]
 
 @app.post("/login")
 def login(loginForm: LoginForm):
