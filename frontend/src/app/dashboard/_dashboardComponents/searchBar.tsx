@@ -1,6 +1,8 @@
-import { Filter, Search } from "lucide-react"
-import { useState } from "react"
-import { useRouter } from "next/router"
+'use client';
+
+import { Filter, Search } from "lucide-react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 /**
  * The search header component.
@@ -23,7 +25,7 @@ export default function SearchBar() {
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault()
         if(searchQuery.length > 0) {
-            router.push(`/search/?q=${searchQuery}&?filter=${filter}&?sort=${sort}`)
+            router.push(`/dashboard/search/?q=${searchQuery}&?filter=${filter}&?sort=${sort}`)
         }
     }
 

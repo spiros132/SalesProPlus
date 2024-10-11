@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Check, X } from 'lucide-react';
-import { Product_Short } from '../lib/definitions';
+import { Product_Short } from '../../../../lib/definitions';
 
 
 /**
@@ -9,9 +9,9 @@ import { Product_Short } from '../lib/definitions';
  * @param product the product this object represents.  
  * @returns a search result object with the product's information.
  */
-export default function SearchResult({ product }: { product: Product_Short }){
+export default function SearchResult({ product }: { readonly product: Product_Short }){
     return(
-        <Link href={`/products/?id=${product.articleID}`} key={product.articleID} className="block">
+        <Link href={`/dashboard/product/${product.articleID}`} key={product.articleID} className="block">
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
                 <div className="p-4 flex items-center space-x-4">
                     <Image

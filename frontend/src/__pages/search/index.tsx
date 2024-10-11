@@ -1,7 +1,7 @@
 import {  useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Product, Filters, Product_Short } from "../../lib/definitions";
-import SearchResult from "../../components/searchResult"
+import SearchResult from "../../app/dashboard/search/_searchComponents/searchResult"
 import { searchProducts } from "@/src/api/search/search";
 
     /**

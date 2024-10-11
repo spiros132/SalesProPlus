@@ -10,7 +10,7 @@ import Image from 'next/image';
 export default function CategoryProduct({product}: {product: Product}) {
 
     return (
-        <Link href={`/products/?id=${product.id}`} key={product.id} className="block">
+        <Link href={`dashboard/product/${product.id}`} key={product.id} className="block">
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
           <Image
             src={product.image}
