@@ -174,7 +174,7 @@ class LoginForm(BaseModel):
 def categories(parent: Optional[str] = None):
     db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
-    if parent is not None:
+    if parent is not None and parent != "":
         cursor.execute("""
             SELECT *
             FROM ProductCategories c
