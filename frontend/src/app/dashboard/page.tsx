@@ -1,12 +1,8 @@
 'use client';
 
-import { ChevronLeft} from 'lucide-react'
-import Image from 'next/image'
 import { useState } from 'react'
 import { Category } from '@/src/lib/definitions'
-import CategoryProduct from '@/src/app/dashboard/_dashboardComponents/categoryProduct'
 import { GetCategory } from '@/src/lib/BackendConnection';
-import CategoryComponent from './_dashboardComponents/categoryComponent';
 import CategoriesComponent from './_dashboardComponents/categories';
 import CategoryProducts from './_dashboardComponents/categoryProducts';
 // replace with api
