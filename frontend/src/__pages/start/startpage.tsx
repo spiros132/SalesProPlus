@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { products } from '../../lib/fakeDB'
 import { categories } from '../../lib/fakeDB'
 import { Category } from '@/src/lib/definitions'
-import CategoryProduct from '@/src/components/categoryProduct'
+import CategoryProduct from '@/src/app/dashboard/_dashboardComponents/categoryProduct'
 // replace with api
 
 /**

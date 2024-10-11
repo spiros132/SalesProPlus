@@ -1,5 +1,5 @@
-import NavBar from "@/src/app/dashboard/_dashboardComponents/navBar";
-import SearchBar from "@/src/app/dashboard/_dashboardComponents/searchBar";
+import BottomBar from "./_dashboardComponents/bottombar";
+import TopBar from "./_dashboardComponents/topbar";
 
 // Root layout for the whole website
 export default function RootLayout(
@@ -9,9 +9,9 @@ export default function RootLayout(
 ) {
     return (
         <div className="min-h-screen flex flex-col">
-            <SearchBar></SearchBar>
+            <TopBar></TopBar>
             <div className="flex-grow p-2">{children}</div>
-            <NavBar></NavBar>
+            <BottomBar></BottomBar>
         </div>
     );
 }

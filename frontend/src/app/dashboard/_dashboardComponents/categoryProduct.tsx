@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Product } from "../lib/definitions";
+import { Product } from "../../../lib/definitions";
 import Image from 'next/image';
 
 /**
@@ -7,10 +7,10 @@ import Image from 'next/image';
  * @param product the product corresponding to this component. 
  * @returns a simple tile with the product's image, name and price.
  */
-export default function CategoryProduct({product}: {product: Product}) {
+export default function CategoryProduct({product}: { readonly product: Product}) {
 
     return (
-        <Link href={`dashboard/product/${product.id}`} key={product.id} className="block">
+        <Link href={`/dashboard/product/${product.id}`} key={product.id} className="block">
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
           <Image
             src={product.image}
