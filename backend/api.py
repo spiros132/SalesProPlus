@@ -43,6 +43,7 @@ class Filter(BaseModel):
     max_depth: Optional[int] = None
     min_length: Optional[int] = None
     max_length: Optional[int] = None
+    category: Optional[str] = None
 
 
 @app.get("/search/{prompt}")
@@ -58,6 +59,7 @@ def search_prompt(prompt: str, filters: Filter = Depends()):
             pd.*
         FROM Products p
         LEFT JOIN ProductDimensions pd ON p.articleID = pd.articleID
+        LEFT JOIN ProductInformation pi ON p.articleID = pi.articleID
         JOIN ProductsFTS s ON p.articleID = s.articleID 
         WHERE ProductsFTS MATCH ?
     """
@@ -103,6 +105,10 @@ def search_prompt(prompt: str, filters: Filter = Depends()):
     if filters.max_length is not None:
         query += " AND pd.length <= ?"
         params.append(filters.max_length)
+
+    if filters.category is not None:
+        query += " AND pi.category = ?"
+        params.append(filters.category)
 
     query += " ORDER BY BM25(ProductsFTS)"
     
