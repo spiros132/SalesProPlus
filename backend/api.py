@@ -163,13 +163,21 @@ class LoginForm(BaseModel):
     username: str
 
 @app.get("/categories")
-def categories():
+def categories(parent: Optional[str] = None):
     db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
-    cursor.execute("""
-        SELECT *
-        FROM ProductCategories
-    """)
+    if parent is not None:
+        cursor.execute("""
+            SELECT *
+            FROM ProductCategories c
+            WHERE c.parent = ?
+        """, (parent, ))
+    else:
+        cursor.execute("""
+            SELECT *
+            FROM ProductCategories c
+            WHERE c.parent IS NULL
+        """)
     result = cursor.fetchall()
     cursor.close()
     db.close()
