@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
 import Error, { ErrorProps } from "next/error";
-import { Category, Filters, Product_Long, Product_Short } from "./definitions";
+import { Category, Filters, LoginForm, Product_Long, Product_Short } from "./definitions";
 
 const backendURL = "http://localhost:8000";
 
@@ -83,5 +83,30 @@ export async function GetCategory(categoryID: string) {
         // Cast the json to the Category interface
         const category: Category = await data.json();
         return category;
+    }
+}
+
+export async function Login(username: string, password: string) {
+    await CheckBackend();
+
+    let form= new FormData();
+    form.append("json", JSON.stringify({username: username, password: password}));
+
+    const data: Response = await fetch(backendURL + `/login`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify({username: username, password: password})
+    });
+
+    if(data.status == 401) {
+        // Couldn't login, user not found
+        return null;
+    } else {
+        const user: LoginForm = await data.json();
+        
+        return user;
     }
 }

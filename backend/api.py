@@ -169,6 +169,7 @@ def product_page(id: int):
 
 class LoginForm(BaseModel):
     username: str
+    password: str
 
 @app.get("/categories")
 def categories(parent: Optional[str] = None):

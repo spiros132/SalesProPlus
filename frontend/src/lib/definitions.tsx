@@ -94,3 +94,10 @@ export interface Product_Long {
     length: number | null;
     packaging: string;
 }
+
+export interface LoginForm {
+    success: boolean;
+    username: string;
+    department: string;
+    region: string;
+}

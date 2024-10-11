@@ -4,6 +4,7 @@ import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Login } from "../lib/BackendConnection";
 
 /* Main page which should be the login page */
 export default function LoginPage() {
@@ -13,7 +14,19 @@ export default function LoginPage() {
 
     function onSubmit() {
         // Check if the username and password are correct and then move to the dashboard
-        router.push("/");
+        Login(username, password)
+        .then((user) => {
+            if(user == null) {
+                // Couldn't login, maybe error?
+            }
+            else {
+                document.cookie = `username=${user.username};`;
+                document.cookie = `department=${user.department};`;
+                document.cookie = `region=${user.region};`;
+
+                router.push("/dashboard");
+            }
+        });
     }
 
     return (
@@ -39,7 +52,7 @@ export default function LoginPage() {
                 onValueChange={setPassword}
                 />
 
-            <Button onClick={onSubmit}>
+            <Button type="submit" onClick={onSubmit}>
                 Login
             </Button>
         </div>
