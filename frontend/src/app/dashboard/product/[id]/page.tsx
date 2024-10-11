@@ -1,6 +1,5 @@
 'use client';
 
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Dimensions } from "@/src/lib/definitions";
 import { GetProduct } from "@/src/lib/BackendConnection";

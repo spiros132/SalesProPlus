@@ -1,11 +1,11 @@
 'use client';
 
 import { useState } from 'react'
+
 import { Category } from '@/src/lib/definitions'
 import { GetCategory } from '@/src/lib/BackendConnection';
 import CategoriesComponent from './_dashboardComponents/categories';
 import CategoryProducts from './_dashboardComponents/categoryProducts';
-// replace with api
 
 /**
  * The component for the start/category page.

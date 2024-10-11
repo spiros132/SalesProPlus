@@ -1,3 +1,5 @@
+'use client';
+
 import { ChevronLeft } from "lucide-react";
 
 export default function BackButton({

@@ -1,8 +1,11 @@
+'use client';
+
+import { useEffect, useState } from "react";
+import { Skeleton } from "@nextui-org/skeleton";
+
 import { SearchProducts } from "@/src/lib/BackendConnection";
 import { Category, Filters, Filter, Product_Short } from "@/src/lib/definitions";
-import { useEffect, useState } from "react";
 import CategoryProduct from "./categoryProduct";
-
 
 
 /**
@@ -16,6 +19,7 @@ export default function CategoryProducts({
     readonly category: Category | null
 }) {
     const [products, setProducts] = useState<Product_Short[]>();
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
     useEffect(() => {
         const filters: Filter[] = [];
@@ -25,16 +29,20 @@ export default function CategoryProducts({
         
         SearchProducts("", new Filters(filters))
         .then((products) => {
-            if(products != null)
+            if(products != null) {
                 setProducts(products);
+                setIsLoaded(true);
+            }
         });
     }, [category]);
 
     return (
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            {category && products?.map((product) => {
-                return CategoryProduct({product});
-            })}
-        </div>
+        <Skeleton isLoaded={isLoaded}>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {category && products?.map((product) => {
+                    return CategoryProduct({product});
+                })}
+            </div>
+        </Skeleton>
     );
 }

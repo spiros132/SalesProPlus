@@ -1,3 +1,5 @@
+'use client';
+
 import SearchResult from "@/src/app/dashboard/search/_searchComponents/searchResult";
 import { Product_Short } from "@/src/lib/definitions";
 

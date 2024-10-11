@@ -1,3 +1,5 @@
+'use client';
+
 import Image from "next/image";
 
 import { Category } from "@/src/lib/definitions";

@@ -1,6 +1,5 @@
 export default function SettingsIcon() {
     return (
-
         <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
             <ellipse 
                 style={{stroke: 'rgb(64, 64, 64)', fill: 'rgba(255, 255, 255, 0)', strokeWidth: '40px'}}
@@ -75,4 +74,5 @@ export default function SettingsIcon() {
                 transform="matrix(0.707107007504, 0.707107007504, -0.707107007504, 0.707107007504, -200.222119624985, -13.715978917234)"
             />
         </svg>
-)}
+    );
+}

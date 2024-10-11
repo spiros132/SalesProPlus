@@ -1,3 +1,5 @@
+'use client';
+
 export default function NoSearchResultComponent() {
     return (
         <div className="text-center">

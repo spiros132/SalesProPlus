@@ -22,6 +22,6 @@ export default function SearchIcon() {
                 style={{stroke: 'rgb(64, 64, 64)', transformOrigin: '131.331px 449.991px', fill: 'rgb(64,64,64)'}} 
                 transform="matrix(0.707107007504, 0.707107007504, -0.707107007504, 0.707107007504, 223.819636234923, -100.732297464018)"
             />
-      </svg>
-
-    )}
+        </svg>
+    );
+}

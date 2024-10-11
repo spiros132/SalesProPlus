@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Link from "next/link"; // Use Next.js's Link component
 import { usePathname } from 'next/navigation';
