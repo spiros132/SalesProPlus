@@ -30,7 +30,7 @@ export default function LoginPage() {
     }
 
     return (
-    <div>
+    <div className="p-12">
         <h1 className="text-center text-6xl font-bold">IKEA Sales Pro Plus</h1>
         <div className="flex-initial flex-col place-content-center space-y-4 mt-6">
             <Input 
