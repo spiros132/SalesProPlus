@@ -25,6 +25,7 @@ CREATE TABLE Products (
 create table ProductCategories (
     categoryID TEXT PRIMARY KEY,
     categoryName TEXT NOT NULL,
+    categoryImage TEXT NOT NULL,
     parent TEXT REFERENCES ProductCategories(categoryID) on delete cascade
 );
 
