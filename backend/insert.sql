@@ -1,6 +1,7 @@
 INSERT INTO Products VALUES (
     10575064, 
-    "IKEA PS 1995", 
+    "IKEA PS 1995",
+    "https://www.ikea.com/se/sv/images/products/ikea-ps-1995-klocka-bla__1277238_pe931019_s5.jpg",
     499, 
     2, 
     "Klockan IKEA PS 1995 visar tiden och är också en iögonfallande dekoration i ditt hem. Du kan hänga den på väggen eller ställa den på en hylla – och öppna fronten på klockan och förvara småsaker."

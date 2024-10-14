@@ -1,7 +1,7 @@
 import sqlite3
 import os
 
-db = sqlite3.connect("backend/test.db")
+db = sqlite3.connect("test.db")
 cursor = db.cursor()
 
 cursor.execute(
