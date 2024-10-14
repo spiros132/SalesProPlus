@@ -26,7 +26,7 @@ export default function CategoryComponent(
         >
             <div>
                 <Image
-                    src={""} // FIX THIS, we need pictures for the categories
+                    src={category.categoryImage} 
                     alt={category.categoryName}
                     width={1280}
                     height={720}

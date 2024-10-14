@@ -14,6 +14,7 @@ export interface Dimensions {
 export interface Category {
     categoryID: string;
     categoryName: string;
+    categoryImage: string;
     parent: string | null;
 }
 
