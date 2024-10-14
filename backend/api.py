@@ -246,18 +246,21 @@ def get_question(product_id: int):
     WHERE product_id= ?
     """,(product_id,))
 
-    #get all questions
-    question = cursor.fetchone()
+    questions = cursor.fetchall()
 
-    if question:
-        return {
+    if not questions:
+        raise HTTPException(status_code=404, detail="Question not found")
+
+    questions_list = []
+    for question in questions:
+        questions_list.append({
             "question_id": question[0],
             "content": question[1],
             "author": question[2],
             "product_id": question[3]
-        }
-    else:
-        raise HTTPException(status_code=404, detail="Question not found")
+        })
+
+    return questions_list
     
 @app.post("/create_answer/")
 def create_answer(answer: answer_create):
@@ -282,17 +285,21 @@ def get_answer(question_id: int):
     WHERE question_id= ?
     """,(question_id,))
     
-    answer = cursor.fetchone()
+    answers = cursor.fetchall()
 
-    if answer:
-        return {
+    if not answers:
+        raise HTTPException(status_code=404, detail="Question not found")
+
+    asnwers_list = []
+    for answer in answers:
+        asnwers_list.append({
             "Answer_id": answer[0],
             "content": answer[1],
             "author": answer[2],
             "Question_id": answer[3]
-        }
-    else:
-        raise HTTPException(status_code=404, detail="Question not found")
+        })
+
+    return asnwers_list
 
 @app.post("/login")
 def login(loginForm: LoginForm):
