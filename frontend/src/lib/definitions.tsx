@@ -125,8 +125,8 @@ export interface CreateAnswerFeedback extends CreateAnswerForm {
 
 export interface Question {
     questionID: number;
-    Content: string;
-    Author: string;
+    content: string;
+    author: string;
     productID: number;
 }
 

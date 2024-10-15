@@ -37,13 +37,13 @@ export default function Questions({
             <div className="flex flex-col space-y-2">
                 {questions ? 
                 (
-                    <Accordion className="p-2">
+                    <Accordion variant="splitted" className="p-2">
                         {questions.map((question: Question) => {
                             return (
                                 <AccordionItem 
                                 key={question.questionID} 
-                                title={`Q: ${question.Content}`} 
-                                subtitle={`Author: ${question.Author}`} 
+                                title={`Q: ${question.content}`} 
+                                subtitle={`Author: ${question.author}`} 
                                 className="bg-slate-200 rounded-xl px-2"
                                 >
                                     <QuestionComponent question={question}></QuestionComponent>

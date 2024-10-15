@@ -3,15 +3,15 @@ import { Button } from "@nextui-org/button";
 import { Textarea } from "@nextui-org/input";
 import { useState } from "react";
 import { useCookies } from 'next-client-cookies';
-import { CreateQuestion } from "@/src/lib/BackendConnection";
+import { CreateAnswer, CreateQuestion } from "@/src/lib/BackendConnection";
 
 
-export default function CreateQuestionComponent({
-    productID,
-    updateQuestions
+export default function CreateAnswerComponent({
+    questionID,
+    updateAnswers
 }: {
-    readonly productID: number,
-    readonly updateQuestions: ()=>void
+    readonly questionID: number,
+    readonly updateAnswers: ()=>void
 }) {
     const [isDisabled, setIsDisabled] = useState<boolean>(false);
     const [content, setContent] = useState<string>("");
@@ -28,7 +28,7 @@ export default function CreateQuestionComponent({
     function handleCreateQuestion() {
         const author = cookies.get("username");
 
-        if(productID == -1 || author == undefined)
+        if(questionID == -1 || author == undefined)
             return;
         
         if(content == "") {
@@ -40,18 +40,18 @@ export default function CreateQuestionComponent({
         // Create the question and send it to the server
         setIsDisabled(true);
 
-        CreateQuestion({
+        CreateAnswer({
             content: content,
             author: author, 
-            productID: productID
+            questionID: questionID
         })
         .then((feedback) => {
             setIsDisabled(false);
-
+            
             if(feedback == null) // Error, something happened
                 setError("Something wrong happened!");
             else // Update the parent
-                updateQuestions();
+                updateAnswers();
         });
 
     }
@@ -60,7 +60,7 @@ export default function CreateQuestionComponent({
         <div className="flex flex-row space-x-4">
             <Textarea 
             minRows={1} maxRows={3} 
-            label="Question" placeholder="Place your question here" 
+            label="Answer" placeholder="Place your answer here" 
             isDisabled={isDisabled}
             classNames={{
                 label: "text-lg",

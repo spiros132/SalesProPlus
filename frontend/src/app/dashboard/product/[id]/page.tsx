@@ -1,12 +1,13 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { Dimensions, Product_Long } from "@/src/lib/definitions";
-import { GetProduct } from "@/src/lib/BackendConnection";
 import { Skeleton } from "@nextui-org/skeleton";
 import { Accordion, AccordionItem } from "@nextui-org/accordion";
 import { Divider } from "@nextui-org/divider";
 import { Link } from "@nextui-org/link";
+
+import { Dimensions, Product_Long } from "@/src/lib/definitions";
+import { GetProduct } from "@/src/lib/BackendConnection";
 import Questions from "./_productComponents/questions";
 
 export default function Products({params} : {
