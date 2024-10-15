@@ -215,36 +215,36 @@ def categories(id: str):
 class question_create(BaseModel):
     content: str
     author: Optional[str]
-    product_id: int
+    productID: int
     
 class answer_create(BaseModel):
     content: str
     author: Optional[str]
-    question_id: int
+    questionID: int
 
 
-@app.post("/create_question/")
-def create_question(question: question_create ):
+@app.post("/create_question")
+def create_question(question: question_create):
     db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     cursor.execute("""
     INSERT INTO Questions(content, author, product_id)
     VALUES (?, ?, ?)
-    """,(question.content, question.author, question.product_id ))
+    """, (question.content, question.author, question.productID))
     db.commit()
     cursor.close()
     db.close()
-    return {"success": True, "content":question.content, "author": question.author, "product id": question.product_id}
+    return {"success": True, "content": question.content, "author": question.author, "product id": question.productID}
 
-@app.get("/questions/{product_id}")
-def get_question(product_id: int):
+@app.get("/questions/{productID}")
+def get_question(productID: int):
     db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     cursor.execute("""
     SELECT *
     FROM Questions
     WHERE product_id= ?
-    """,(product_id,))
+    """,(productID,))
 
     questions = cursor.fetchall()
 
@@ -254,36 +254,36 @@ def get_question(product_id: int):
     questions_list = []
     for question in questions:
         questions_list.append({
-            "question_id": question[0],
+            "questionID": question[0],
             "content": question[1],
             "author": question[2],
-            "product_id": question[3]
+            "productID": question[3]
         })
 
     return questions_list
     
-@app.post("/create_answer/")
+@app.post("/create_answer")
 def create_answer(answer: answer_create):
     db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     cursor.execute("""
     INSERT INTO Answers(content, author, question_id)
     VALUES (?, ?, ?)
-    """,(answer.content, answer.author, answer.question_id ))
+    """, (answer.content, answer.author, answer.questionID))
     db.commit()
     cursor.close()
     db.close()
-    return {"success": True, "content":answer.content, "author": answer.author, "question id": answer.question_id}
+    return {"success": True, "content": answer.content, "author": answer.author, "questionID": answer.questionID}
 
-@app.get("/answers/{question_id}")
-def get_answer(question_id: int):
+@app.get("/answers/{questionID}")
+def get_answer(questionID: int):
     db = sqlite3.connect(DB_PATH)
     cursor = db.cursor()
     cursor.execute("""
     SELECT *
     FROM Answers
     WHERE question_id= ?
-    """,(question_id,))
+    """,(questionID,))
     
     answers = cursor.fetchall()
 
@@ -293,10 +293,10 @@ def get_answer(question_id: int):
     asnwers_list = []
     for answer in answers:
         asnwers_list.append({
-            "Answer_id": answer[0],
+            "answerID": answer[0],
             "content": answer[1],
             "author": answer[2],
-            "Question_id": answer[3]
+            "questionID": answer[3]
         })
 
     return asnwers_list

@@ -1,7 +1,7 @@
 'use client';
 
 import Error, { ErrorProps } from "next/error";
-import { Category, Filters, LoginForm, Product_Long, Product_Short } from "./definitions";
+import { Answer, Category, CreateAnswerFeedback, CreateAnswerForm, CreateQuestionFeedback, CreateQuestionForm, Filters, LoginFeedback, Product_Long, Product_Short, Question } from "./definitions";
 
 const backendURL = "http://localhost:8000";
 
@@ -89,9 +89,6 @@ export async function GetCategory(categoryID: string) {
 export async function Login(username: string, password: string) {
     await CheckBackend();
 
-    let form= new FormData();
-    form.append("json", JSON.stringify({username: username, password: password}));
-
     const data: Response = await fetch(backendURL + `/login`, {
         method: "POST",
         headers: {
@@ -105,8 +102,85 @@ export async function Login(username: string, password: string) {
         // Couldn't login, user not found
         return null;
     } else {
-        const user: LoginForm = await data.json();
+        const user: LoginFeedback = await data.json();
         
         return user;
+    }
+}
+
+export async function CreateQuestion(question: CreateQuestionForm) {
+    await CheckBackend();
+
+    const data: Response = await fetch(backendURL + `/create_question`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(question)
+    });
+
+    if(data.status == 404) {
+        
+        return null;
+    } else {
+        const feedback: CreateQuestionFeedback = await data.json();
+
+        return feedback;
+    }
+}
+
+export async function CreateAnswer(answer: CreateAnswerForm) {
+    await CheckBackend();
+
+    const data: Response = await fetch(backendURL + `/create_answer`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(answer)
+    });
+
+    if(data.status == 404) {
+        return null;
+    } else {
+        const feedback: CreateAnswerFeedback = await data.json();
+
+        return feedback;
+    }
+}
+
+export async function GetQuestions(productID: number) {
+    await CheckBackend();
+
+    // Get data from the backend
+    const data: Response = await fetch(backendURL + `/questions/${productID}`);
+
+    // Check that we got the correct response
+    if(data.status == 404) {
+        return null;
+    } else {
+        // Cast the json to the Category interface
+        const questions: Question[] = await data.json();
+
+        return questions;
+    }
+}
+
+export async function GetAnswers(questionID: number) {
+    await CheckBackend();
+
+    // Get data from the backend
+    const data: Response = await fetch(backendURL + `/answers/${questionID}`);
+
+    // Check that we got the correct response
+    if(data.status == 404) {
+        return null;
+    } else {
+        // Cast the json to the Category interface
+        const questions: Answer[] = await data.json();
+
+        return questions;
     }
 }

@@ -96,9 +96,43 @@ export interface Product_Long {
     packaging: string;
 }
 
-export interface LoginForm {
+export interface LoginFeedback {
     success: boolean;
     username: string;
     department: string;
     region: string;
+}
+
+export interface CreateQuestionForm {
+    content: string;
+    author: string;
+    productID: number;
+}
+
+export interface CreateQuestionFeedback extends CreateQuestionForm {
+    success: boolean;
+}
+
+export interface CreateAnswerForm {
+    content: string;
+    author: string;
+    questionID: number;
+}
+
+export interface CreateAnswerFeedback extends CreateAnswerForm {
+    success: boolean;
+}
+
+export interface Question {
+    questionID: number;
+    Content: string;
+    Author: string;
+    productID: number;
+}
+
+export interface Answer {
+    answerID: number;
+    content: string;
+    author: string;
+    questionID: number;
 }

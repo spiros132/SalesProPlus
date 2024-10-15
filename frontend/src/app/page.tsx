@@ -5,12 +5,15 @@ import { Button } from "@nextui-org/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Login } from "../lib/BackendConnection";
+import { useCookies } from "next-client-cookies";
 
 /* Main page which should be the login page */
 export default function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const router = useRouter();
+
+    const cookies = useCookies();
 
     function onSubmit() {
         // Check if the username and password are correct and then move to the dashboard
@@ -20,9 +23,9 @@ export default function LoginPage() {
                 // Couldn't login, maybe error?
             }
             else {
-                document.cookie = `username=${user.username};`;
-                document.cookie = `department=${user.department};`;
-                document.cookie = `region=${user.region};`;
+                cookies.set("username", user.username);
+                cookies.set("department", user.department);
+                cookies.set("region", user.region);
 
                 router.push("/dashboard");
             }
