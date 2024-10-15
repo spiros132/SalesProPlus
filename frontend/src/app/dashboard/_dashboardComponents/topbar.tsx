@@ -1,8 +1,9 @@
 'use client';
 
-import { Filter, Search } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import SearchIcon from "@/src/icons/searchicon";
+
 
 /**
  * The search header component.
@@ -30,24 +31,28 @@ export default function SearchBar() {
     }
 
     return (
-        <header className=" sticky top-0 z-10  bg-white p-4 border-b-2 ">
-            <form onSubmit={handleSearch} className="flex items-center  ">
-                <div className="flex-grow bg-gray-100 flex items-center border rounded-2xl overflow-hidden border-gray-300 ">
+        <header className=" sticky top-0 z-10  bg-white p-4 border-b-2 flex justify-center">
+            <form onSubmit={handleSearch} className="flex items-center w-[80%]">
+                <div className="flex-grow bg-gray-100 flex items-center rounded-2xl overflow-hidden p-1">
                     {(!isFocused && searchQuery.length == 0) && (
-                    <Search className="ml-2 h-5 w-5" />
+                    <div className="h-7 w-7 ml-2">
+                        <SearchIcon></SearchIcon>
+                    </div>
                     )}
                     <input
-                    type="search"
-                    placeholder="Search products..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    onFocus={() => setIsFocused(true)}
-                    onBlur={() => setIsFocused(false)}
-                    className="flex-grow p-2 bg-gray-100 focus:outline-none "
+                        type="search"
+                        placeholder="Search products..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onFocus={() => setIsFocused(true)}
+                        onBlur={() => setIsFocused(false)}
+                        className="flex-grow p-2 bg-gray-100 focus:outline-none "
                     />
                     {(isFocused || searchQuery.length > 0) && (
                     <button type="submit" className="p-2 bg-gray-100 text-black ">
-                        <Search className="h-5 w-5" />
+                        <div className="h-7 w-7">
+                            <SearchIcon></SearchIcon>
+                        </div>
                         <span className="sr-only">Search</span>
                     </button>
                     )}
