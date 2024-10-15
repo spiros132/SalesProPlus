@@ -38,7 +38,7 @@ export default function CategoryProducts({
 
     return (
         <Skeleton isLoaded={isLoaded}>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <div className="">
                 {category && products?.map((product) => {
                     return CategoryProduct({product});
                 })}
