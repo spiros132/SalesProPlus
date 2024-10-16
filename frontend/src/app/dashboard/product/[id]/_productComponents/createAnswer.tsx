@@ -3,7 +3,7 @@ import { Button } from "@nextui-org/button";
 import { Textarea } from "@nextui-org/input";
 import { useState } from "react";
 import { useCookies } from 'next-client-cookies';
-import { CreateAnswer, CreateQuestion } from "@/src/lib/BackendConnection";
+import { CreateAnswer } from "@/src/lib/BackendConnection";
 
 
 export default function CreateAnswerComponent({

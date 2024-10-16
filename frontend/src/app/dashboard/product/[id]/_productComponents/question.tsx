@@ -1,9 +1,9 @@
 import { GetAnswers } from "@/src/lib/BackendConnection";
 import { Answer, Question } from "@/src/lib/definitions";
-import { Accordion, AccordionItem } from "@nextui-org/accordion";
 import { Skeleton } from "@nextui-org/skeleton";
 import { useEffect, useState } from "react";
 import CreateAnswerComponent from "./createAnswer";
+import AnswerComponent from "./answer";
 
 export default function QuestionComponent({
     question
@@ -35,13 +35,7 @@ export default function QuestionComponent({
                 <ul className="flex flex-col space-y-0.5 p-2">
                     {answers.map((answer: Answer) => {
                         return (
-                            <ol 
-                            key={answer.questionID} 
-                            className="bg-slate-50 rounded-xl p-2"
-                            >
-                                <p>{`A: ${answer.content}`}</p>
-                                <p>{`Author: ${answer.author}`}</p>
-                            </ol>
+                            <AnswerComponent key={answer.answerID} answer={answer}/>
                         );
                     })}
                 </ul>

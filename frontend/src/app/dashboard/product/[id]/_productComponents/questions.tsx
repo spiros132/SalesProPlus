@@ -46,7 +46,7 @@ export default function Questions({
                                 subtitle={`Author: ${question.author}`} 
                                 className="bg-slate-200 rounded-xl px-2"
                                 >
-                                    <QuestionComponent question={question}></QuestionComponent>
+                                    <QuestionComponent question={question}/>
                                 </AccordionItem>
                             );
                         })}

@@ -93,7 +93,7 @@ export default function Products({params} : {
                     <p className="text-md">{product?.safety}</p>
                 </AccordionItem>
                 <AccordionItem title="Q&A">
-                    <Questions productID={product?.articleID}></Questions>
+                    <Questions productID={product?.articleID}/>
                 </AccordionItem>
             </Accordion>
         </Skeleton>

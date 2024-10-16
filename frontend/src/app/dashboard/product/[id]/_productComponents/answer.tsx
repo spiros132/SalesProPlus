@@ -1,19 +1,16 @@
 import { Answer } from "@/src/lib/definitions";
-import { useEffect } from "react";
-
 
 export default function AnswerComponent({
     answer
 }: {
     readonly answer: Answer
 }) {
-    useEffect(() => {
-        
-    }, [answer]);
-
     return (
-        <div>
-
-        </div>
+        <ol 
+        className="bg-slate-50 rounded-xl p-2"
+        >
+            <p>{`A: ${answer.content}`}</p>
+            <p>{`Author: ${answer.author}`}</p>
+        </ol>
     );
 }

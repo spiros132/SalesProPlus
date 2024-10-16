@@ -5,7 +5,7 @@ import { Skeleton } from "@nextui-org/skeleton";
 
 import CategoryComponent from "./categoryComponent";
 import { Category } from "@/src/lib/definitions";
-import { GetCategories, GetCategory } from "@/src/lib/BackendConnection";
+import { GetCategories } from "@/src/lib/BackendConnection";
 import BackButton from "./categoryBackButton";
 
 /**
