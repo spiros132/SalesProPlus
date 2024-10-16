@@ -5,7 +5,7 @@ import { Skeleton } from "@nextui-org/skeleton";
 
 import { SearchProducts } from "@/src/lib/BackendConnection";
 import { Category, Filters, Filter, Product_Short } from "@/src/lib/definitions";
-import CategoryProduct from "./categoryProduct";
+import SearchResult from "../search/_searchComponents/searchResult";
 
 
 /**
@@ -40,7 +40,7 @@ export default function CategoryProducts({
         <Skeleton isLoaded={isLoaded}>
             <div className="">
                 {category && products?.map((product) => {
-                    return CategoryProduct({product});
+                    return SearchResult({product});
                 })}
             </div>
         </Skeleton>
