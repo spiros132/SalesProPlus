@@ -94,7 +94,7 @@ export default function Startpage() {
   
   
   return (
-    <div className="space-y-6">
+    <div className="">
       {CategoriesComponent({parent: selectedCategory, setCategory: changeCategory})}
 
       {CategoryProducts({category: selectedCategory})}

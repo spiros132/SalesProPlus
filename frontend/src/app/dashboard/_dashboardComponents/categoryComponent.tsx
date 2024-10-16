@@ -18,10 +18,12 @@ export default function CategoryComponent(
         readonly category: Category, 
         readonly setCategory: (categoryID: string)=>void
     }) {
+
+        const hasParent = category.parent == null ? false : true;
     return (
         <button 
             key={category.categoryID} 
-            className="block bg-white overflow-hidden p-2"
+            className={`${hasParent ? 'flex-none w-[25vw]' : 'block'} bg-white overflow-hidden p-2 `}
             onClick={() => setCategory(category.categoryID)}
         >
             <div>
@@ -31,7 +33,6 @@ export default function CategoryComponent(
                     width={1280}
                     height={720}
                     style={{ alignSelf: 'center' }}
-                    className="w-full h-auto"
                 />
                 <span className="mt-2 text-center font-semibold">{category.categoryName}</span>
             </div>

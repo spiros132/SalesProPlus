@@ -43,10 +43,11 @@ export default function CategoriesComponent(
     return (
         <Skeleton isLoaded={isLoaded}>
             {parent != null ? BackButton({handleGoBack}) : null}
-            <div className="grid grid-cols-2 gap-4">
+            <div className={`${parent == null ? 'grid grid-cols-2 gap-4' : 'flex overflow-x-auto space-x-4 scrollbar-hide scroll-smooth p-4'}`}>
                 {categories?.map((category: Category) => {
                     return CategoryComponent({category, setCategory});
                 })}
+                
             </div>
         </Skeleton>
     );
