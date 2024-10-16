@@ -17,7 +17,7 @@ export default function SearchResult({ product }: { readonly product: Product_Sh
 
     return(
         <Link href={`/dashboard/product/${product.articleID}`} key={product.articleID} className="block">
-        <div className="flex overflow-hidden border-t-1 border-b-1 items-center">
+        <div className="flex overflow-hidden border-t-2 border-b-2 items-center">
           <Image
             src={product.image}
             alt={product.name}
