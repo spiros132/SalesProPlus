@@ -35,13 +35,42 @@ export interface Product {
  * Filter interface for sending the url and getting the whole string of values.
  */
 export class Filters {
-    constructor(filters: Filter[]) {
-        filters.forEach((filter) => {
-            this.filterSearch += `${filter.name}=${filter.value}&`;
-        });
+    filters: Filter[];
+
+    constructor(filters: Filter[] = []) {
+        this.filters = filters;
     }
 
-    filterSearch: string = "";
+    toString(): string {
+        let filterSearch: string = "";
+
+        this.filters.forEach((filter) => {
+            filterSearch += `${filter.name}=${filter.value}&`;
+        });
+
+        return filterSearch;
+    }
+
+    add(filter:Filter) {
+        let i = this.filters.findIndex((f) => {
+            return f.name == filter.name;
+        });
+
+        // Add the new filter to the list
+        if(i == -1)
+            this.filters.push(filter);
+        else
+            this.filters[i] = filter;
+    }
+
+    remove(name: string) {
+        let i = this.filters.findIndex((f) => {
+            return f.name == name;
+        });
+
+        if(i != -1)
+            this.filters.splice(i, 1);
+    }
 }
 
 /* Filter interface for one kind of filter*/

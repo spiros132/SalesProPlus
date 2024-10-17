@@ -37,12 +37,11 @@ export async function GetProduct(productID: number): Promise<Product_Long | null
     }
 }
 
-
 export async function SearchProducts(searchQuery: string, filters: Filters) {
     await CheckBackend();
     
     // Get data from the backend
-    const data: Response = await fetch(backendURL + `/search?q=${searchQuery}&${filters.filterSearch}`);
+    const data: Response = await fetch(backendURL + `/search?q=${searchQuery}&${filters.toString()}`);
 
     // Check that we got the correct response
     if(data.status == 404) {
