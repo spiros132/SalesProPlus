@@ -47,9 +47,7 @@ export default function CategoriesComponent(
                 {categories?.map((category: Category) => {
                     return CategoryComponent({category, setCategory});
                 })}
-                {categories?.map((category: Category) => {
-                    return CategoryComponent({category, setCategory});
-                })}
+
                 
             </div>
         </Skeleton>
