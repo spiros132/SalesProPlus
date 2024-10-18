@@ -32,7 +32,7 @@ export default function CategoryComponent(
                     alt={category.categoryName}
                     width={1280}
                     height={720}
-                    className="object-cover w-full h-full"
+                    className="object-cover w-full h-full rounded-md"
                     style={{ alignSelf: 'center' }}
                 />
                 {hasParent ? (

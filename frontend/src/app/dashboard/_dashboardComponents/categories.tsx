@@ -7,6 +7,7 @@ import CategoryComponent from "./categoryComponent";
 import { Category } from "@/src/lib/definitions";
 import { GetCategories, GetCategory } from "@/src/lib/BackendConnection";
 import BackButton from "./categoryBackButton";
+import "../../../../styles/scrollbar.css";
 
 /**
  * Component for showing multiple categories into the view
@@ -43,8 +44,17 @@ export default function CategoriesComponent(
     return (
         <Skeleton isLoaded={isLoaded}>
             {parent != null ? BackButton({handleGoBack}) : null}
-            <div className={`${parent == null ? 'grid grid-cols-2 gap-4' : 'flex overflow-x-auto space-x-4 scrollbar-hide scroll-smooth p-4'}`}>
+            <div className={`${parent == null ? 'grid grid-cols-2 gap-4' : 'flex overflow-x-auto space-x-4 scrollbar-show scroll-smooth p-4'}`}>
                 {categories?.map((category: Category) => {
+                    return CategoryComponent({category, setCategory});
+                })}
+                                {categories?.map((category: Category) => {
+                    return CategoryComponent({category, setCategory});
+                })}
+                                {categories?.map((category: Category) => {
+                    return CategoryComponent({category, setCategory});
+                })}
+                                {categories?.map((category: Category) => {
                     return CategoryComponent({category, setCategory});
                 })}
 
