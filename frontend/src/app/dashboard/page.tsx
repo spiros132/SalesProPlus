@@ -44,9 +44,8 @@ export default function Startpage() {
   }
   
   return (
-    <div className="space-y-6">
-      {/* The shown categories at the top of the page */}
-      <CategoriesComponent parent={selectedCategory} setCategory={changeCategory}/>
+    <div className="">
+      {CategoriesComponent({parent: selectedCategory, setCategory: changeCategory})}
 
       {/* The Filters that show only if you have selected a category */}
       {selectedCategory != null && FiltersComponent({addFilter: addFilter, removeFilter: removeFilter})}
