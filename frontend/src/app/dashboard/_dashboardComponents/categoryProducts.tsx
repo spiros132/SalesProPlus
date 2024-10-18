@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Skeleton } from "@nextui-org/skeleton";
 
 import { SearchProducts } from "@/src/lib/BackendConnection";
-import { Category, Filters, Filter, Product_Short } from "@/src/lib/definitions";
+import { Category, Filters, Product_Short } from "@/src/lib/definitions";
 import CategoryProduct from "./categoryProduct";
 
 
@@ -14,27 +14,33 @@ import CategoryProduct from "./categoryProduct";
  * @returns a grid with all the products in the selected category 
  */
 export default function CategoryProducts({
-    category
+    category,
+    filters,
+    filterUpdate
 } : {
-    readonly category: Category | null
+    readonly category: Category | null,
+    readonly filters: Filters,
+    readonly filterUpdate: boolean
 }) {
     const [products, setProducts] = useState<Product_Short[]>();
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
     useEffect(() => {
-        const filters: Filter[] = [];
+        setIsLoaded(false);
+        if(category != null) {
+            filters.add({name: "category", value: category.categoryID})
+        } else {
+            filters.remove("category");
+        }
         
-        if(category != null)
-            filters.push({name: "category", value: category.categoryID});
-        
-        SearchProducts("", new Filters(filters))
+        SearchProducts("", filters)
         .then((products) => {
             if(products != null) {
                 setProducts(products);
                 setIsLoaded(true);
             }
         });
-    }, [category]);
+    }, [category, filterUpdate]);
 
     return (
         <Skeleton isLoaded={isLoaded}>

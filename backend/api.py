@@ -212,6 +212,95 @@ def categories(id: str):
 
     return dict(zip(column_names, result))
 
+class question_create(BaseModel):
+    content: str
+    author: Optional[str]
+    productID: int
+    
+class answer_create(BaseModel):
+    content: str
+    author: Optional[str]
+    questionID: int
+
+
+@app.post("/create_question")
+def create_question(question: question_create):
+    db = sqlite3.connect(DB_PATH)
+    cursor = db.cursor()
+    cursor.execute("""
+    INSERT INTO Questions(content, author, product_id)
+    VALUES (?, ?, ?)
+    """, (question.content, question.author, question.productID))
+    db.commit()
+    cursor.close()
+    db.close()
+    return {"success": True, "content": question.content, "author": question.author, "product id": question.productID}
+
+@app.get("/questions/{productID}")
+def get_question(productID: int):
+    db = sqlite3.connect(DB_PATH)
+    cursor = db.cursor()
+    cursor.execute("""
+    SELECT *
+    FROM Questions
+    WHERE product_id= ?
+    """,(productID,))
+
+    questions = cursor.fetchall()
+
+    if not questions:
+        raise HTTPException(status_code=404, detail="Question not found")
+
+    questions_list = []
+    for question in questions:
+        questions_list.append({
+            "questionID": question[0],
+            "content": question[1],
+            "author": question[2],
+            "productID": question[3]
+        })
+
+    return questions_list
+    
+@app.post("/create_answer")
+def create_answer(answer: answer_create):
+    db = sqlite3.connect(DB_PATH)
+    cursor = db.cursor()
+    cursor.execute("""
+    INSERT INTO Answers(content, author, question_id)
+    VALUES (?, ?, ?)
+    """, (answer.content, answer.author, answer.questionID))
+    db.commit()
+    cursor.close()
+    db.close()
+    return {"success": True, "content": answer.content, "author": answer.author, "questionID": answer.questionID}
+
+@app.get("/answers/{questionID}")
+def get_answer(questionID: int):
+    db = sqlite3.connect(DB_PATH)
+    cursor = db.cursor()
+    cursor.execute("""
+    SELECT *
+    FROM Answers
+    WHERE question_id= ?
+    """,(questionID,))
+    
+    answers = cursor.fetchall()
+
+    if not answers:
+        raise HTTPException(status_code=404, detail="Question not found")
+
+    asnwers_list = []
+    for answer in answers:
+        asnwers_list.append({
+            "answerID": answer[0],
+            "content": answer[1],
+            "author": answer[2],
+            "questionID": answer[3]
+        })
+
+    return asnwers_list
+
 @app.post("/login")
 def login(loginForm: LoginForm):
 

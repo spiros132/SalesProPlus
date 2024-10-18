@@ -5,7 +5,7 @@ import { Skeleton } from "@nextui-org/skeleton";
 
 import CategoryComponent from "./categoryComponent";
 import { Category } from "@/src/lib/definitions";
-import { GetCategories, GetCategory } from "@/src/lib/BackendConnection";
+import { GetCategories } from "@/src/lib/BackendConnection";
 import BackButton from "./categoryBackButton";
 
 /**
@@ -31,7 +31,9 @@ export default function CategoriesComponent(
     }
 
     useEffect(() => {
-        GetCategories(parent ? parent.categoryID : null)
+        setIsLoaded(false);
+
+        GetCategories(parent?.categoryID ?? null)
         .then((categories) => {
             if(categories != null) {
                 setCategories(categories);
@@ -42,7 +44,7 @@ export default function CategoriesComponent(
 
     return (
         <Skeleton isLoaded={isLoaded}>
-            {parent != null ? BackButton({handleGoBack}) : null}
+            {parent != null && BackButton({handleGoBack})}
             <div className="grid grid-cols-2 gap-4">
                 {categories?.map((category: Category) => {
                     return CategoryComponent({category, setCategory});

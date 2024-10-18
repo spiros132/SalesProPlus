@@ -1,6 +1,6 @@
 'use client';
 
-import { Filter, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 

@@ -16,6 +16,7 @@ CREATE TABLE User (
 CREATE TABLE Products (
     articleID INT PRIMARY KEY,
     name TEXT NOT NULL,
+    image TEXT NOT NULL,
     price INT NOT NULL,
     stock INT NOT NULL,
     description TEXT
@@ -24,6 +25,7 @@ CREATE TABLE Products (
 create table ProductCategories (
     categoryID TEXT PRIMARY KEY,
     categoryName TEXT NOT NULL,
+    categoryImage TEXT NOT NULL,
     parent TEXT REFERENCES ProductCategories(categoryID) on delete cascade
 );
 
@@ -68,6 +70,22 @@ CREATE VIRTUAL TABLE ProductsFTS USING fts5 (
     name,
     description,
     tokenize="trigram case_sensitive 0"
+);
+
+CREATE TABLE Questions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    content TEXT NOT NULL,
+    author TEXT,
+    product_id INT,
+    FOREIGN KEY (product_id) REFERENCES Products(articleID)
+);
+
+CREATE TABLE Answers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    content TEXT NOT NULL,
+    author TEXT,
+    question_id INT NOT NULL,
+    FOREIGN KEY (question_Id) REFERENCES Questions(id)
 );
 
 CREATE TRIGGER after_products_insert_update
