@@ -1,8 +1,9 @@
 import { Filter } from "@/src/lib/definitions";
-import { Button } from "@nextui-org/button";
+//import { Button } from "@nextui-org/button";
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@nextui-org/dropdown";
 import { Slider } from "@nextui-org/slider";
 import { useState } from "react";
+import ArrowIcon from "@/src/icons/filterarrowicon";
 
 export default function FilterComponent({
     name,
@@ -51,7 +52,17 @@ export default function FilterComponent({
     return (
         <Dropdown>
             <DropdownTrigger>
-                <Button>{name}</Button>
+                <button
+                    className="bg-white border-1 border-black pl-4 pr-6 pt-2 pb-2 rounded-[20px] text-xs flex items-center h-9"
+                >
+                    <div className="h-full pr-3">
+                        <ArrowIcon></ArrowIcon>                            
+                    </div>
+                    <p className="">
+                        {name}
+                    </p>
+
+                    </button>
             </DropdownTrigger>
             <DropdownMenu closeOnSelect={false}>
                 <DropdownItem textValue={name}>
