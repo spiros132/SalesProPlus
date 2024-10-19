@@ -1,0 +1,19 @@
+/* Ensure the horizontal scrollbar is always visible */
+.scrollbar-show {
+    scrollbar-width: auto; /* Firefox */
+    overflow-x: scroll; /* Ensure scroll behavior even without overflow */
+  }
+  
+  /* Webkit-based browsers (Chrome, Edge, Safari) */
+  .scrollbar-show::-webkit-scrollbar {
+    height: 4px; /* Adjust this height if necessary */
+  }
+  
+  .scrollbar-show::-webkit-scrollbar-thumb {
+    background-color: #888; /* Customize the color of the scrollbar thumb */
+    border-radius: 10px; /* Optional: to make the scrollbar rounded */
+  }
+  
+  .scrollbar-show::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Optional: Darker color on hover */
+  }

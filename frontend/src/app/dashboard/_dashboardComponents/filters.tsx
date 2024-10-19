@@ -2,6 +2,7 @@
 
 import { Filter } from "@/src/lib/definitions";
 import FilterComponent from "./filter";
+import "../../../../styles/scrollbar.css";
 
 export default function FiltersComponent({
     addFilter,
@@ -11,7 +12,7 @@ export default function FiltersComponent({
     readonly removeFilter: (name: string)=>void
 }) {
     return (
-        <div className="flex flex-row space-x-2 overflow-x-auto">
+        <div className="flex flex-row space-x-2 overflow-x-auto scrollbar-show p-2 m-4">
             <FilterComponent 
             name="Price" minValue={0} maxValue={10000} 
             options={{style:"currency", currency:"SEK"}}
