@@ -5,8 +5,13 @@ import sqlite3
 from pydantic import BaseModel
 import os
 from typing import Optional, Tuple
-
+from groq import Groq
+from dotenv import load_dotenv
 #pip install fastapi
+
+load_dotenv()
+
+client = Groq(api_key=os.getenv("GROQ_API_KEY"),)
 
 DB_PATH = "test.db"
 app = FastAPI()
@@ -30,7 +35,35 @@ def check_working():
 
 @app.get("/chat/{question}")
 def chat(question: str):
-    return ""
+
+    fd = open('tables.sql', 'r')
+    sqlFile = fd.read()
+    fd.close()
+
+    formattedSql = sqlFile.replace("\n", "").replace(" ", "")
+
+    first_question =  formattedSql + " " + "From this exact schema make a safe query and only a query no other text, always make a search with sqllite3 fts and no like searches, make the query based on this question:" + " " + question
+
+    chat_completion = client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": first_question,
+            }
+        ],
+        model="mixtral-8x7b-32768",
+    )
+
+    db = sqlite3.connect(DB_PATH)
+
+    cursor =  db.cursor()
+    query = chat_completion.choices[0].message.content.strip()
+    print(query)
+    cursor.execute(query)
+
+    result = cursor.fetchall()
+
+    return result
 
 class Filter(BaseModel):
     min_price: Optional[int] = None
