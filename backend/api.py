@@ -7,7 +7,9 @@ import os
 from typing import Optional, Tuple
 from groq import Groq
 from dotenv import load_dotenv
+import json
 #pip install fastapi
+
 
 load_dotenv()
 
@@ -40,30 +42,67 @@ def chat(question: str):
     sqlFile = fd.read()
     fd.close()
 
-    formattedSql = sqlFile.replace("\n", "").replace(" ", "")
+    first_instruction = """
+        Following this exact schema, make a query using relevant columns or rows that are guaranteed present in the schema; 
+        never ever make up any fields to avoid errors; Always use the exact names of the fields to avoid errors;
+        Always include all columns from the tables in the query using the select all asterisk and join to include the name always; Do not output anything else than the actual query no comment or descriptions or anything at all other than the query; Make the query based on this question:
+        """
 
-    first_question =  formattedSql + " " + "From this exact schema make a safe query and only a query no other text, always make a search with sqllite3 fts and no like searches, make the query based on this question:" + " " + question
+    first_question =  sqlFile.strip() + " " + first_instruction + " " + question
 
-    chat_completion = client.chat.completions.create(
+    first_chat = client.chat.completions.create(
         messages=[
             {
                 "role": "user",
                 "content": first_question,
             }
         ],
-        model="mixtral-8x7b-32768",
+        model="gemma2-9b-it",
     )
+
+    query = first_chat.choices[0].message.content
+    print(query)
 
     db = sqlite3.connect(DB_PATH)
 
     cursor =  db.cursor()
-    query = chat_completion.choices[0].message.content.strip()
-    print(query)
-    cursor.execute(query)
 
-    result = cursor.fetchall()
+    try:
+        cursor.execute(query)
+        result = cursor.fetchall()
+        
+        column_names = [description[0] for description in cursor.description]
 
-    return result
+        formatted_list = []
+        for row in result:
+            row_dict = dict(zip(column_names, row))
+            row_string = " ".join([f"{key}: {value}" for key, value in row_dict.items()])
+            formatted_list.append(row_string)
+
+        formatted_result = ";".join(formatted_list)
+
+        last_instruction = """
+            Give a summary of the result given here before;
+            If a articleID is in the result, format a link for the result like this localhost:8000/product/articleID and be sure to only have spaces next to the link to make it clickable;
+            Make it based on this question asked:
+            """
+
+        last_question = formatted_result + " " + last_instruction + " " + question
+
+        last_chat = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": last_question,
+                }
+            ],
+            model="gemma2-9b-it",
+        )
+
+        return last_chat.choices[0].message.content
+    
+    except sqlite3.Error as e:
+        return {"error": str(e)}
 
 class Filter(BaseModel):
     min_price: Optional[int] = None
