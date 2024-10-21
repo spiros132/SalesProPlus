@@ -1,15 +1,15 @@
 import sqlite3
 import os
 
-db = sqlite3.connect("test.db")
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+db = sqlite3.connect(os.path.join(script_dir, "test.db"))
 cursor = db.cursor()
 
 cursor.execute(
     """SELECT name FROM sqlite_master WHERE type = 'table';"""
 )
 print(cursor.fetchall())
-
-script_dir = os.path.dirname(os.path.abspath(__file__))
 
 tables_sql_path = os.path.join(script_dir, 'tables.sql')
 
@@ -94,6 +94,10 @@ cursor.execute(
 );
 """
 )
+
+cursor.execute("""
+    INSERT INTO User (username, department, region) VALUES ("test", "kallered", "sweden")
+""")
 
 db.commit()
 
