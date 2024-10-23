@@ -103,7 +103,7 @@ def chat(chat: Chat):
 
             return {"answer": last_chat.choices[0].message.content}
         else:
-            return {"answer": "The result was inconclusive."}
+            return {"answer": "We could not find an answer for your question, please try again."}
     
     except sqlite3.Error as e:
         return {"error": str(e)}
