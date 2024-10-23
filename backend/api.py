@@ -7,7 +7,6 @@ import os
 from typing import Optional, Tuple
 from groq import Groq
 from dotenv import load_dotenv
-import json
 #pip install fastapi
 
 
@@ -35,8 +34,11 @@ app.add_middleware(
 def check_working():
     return "Working"
 
-@app.get("/chat/{question}")
-def chat(question: str):
+class Chat(BaseModel):
+    question: str
+
+@app.post("/chat")
+def chat(chat: Chat):
 
     fd = open('tables.sql', 'r')
     sqlFile = fd.read()
@@ -48,7 +50,7 @@ def chat(question: str):
         Always include all columns from the tables in the query using the select all asterisk and join to include the name always; Do not output anything else than the actual query no comment or descriptions or anything at all other than the query; Make the query based on this question:
         """
 
-    first_question =  sqlFile.strip() + " " + first_instruction + " " + question
+    first_question =  sqlFile.strip() + " " + first_instruction + " " + chat.question
 
     first_chat = client.chat.completions.create(
         messages=[
@@ -87,7 +89,7 @@ def chat(question: str):
             Make it based on this question asked:
             """
 
-        last_question = formatted_result + " " + last_instruction + " " + question
+        last_question = formatted_result + " " + last_instruction + " " + chat.question
 
         last_chat = client.chat.completions.create(
             messages=[
