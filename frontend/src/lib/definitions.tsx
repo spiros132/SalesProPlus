@@ -165,3 +165,11 @@ export interface Answer {
     author: string;
     questionID: number;
 }
+
+export interface ChatAIForm {
+    question: string;
+}
+
+export interface ChatAIFeedback {
+    answer: string;
+}
