@@ -1,7 +1,7 @@
 'use client';
 
 import Error, { ErrorProps } from "next/error";
-import { Answer, Category, CreateAnswerFeedback, CreateAnswerForm, CreateQuestionFeedback, CreateQuestionForm, Filters, LoginFeedback, Product_Long, Product_Short, Question } from "./definitions";
+import { Answer, Category, ChatAIFeedback, ChatAIForm, CreateAnswerFeedback, CreateAnswerForm, CreateQuestionFeedback, CreateQuestionForm, Filters, LoginFeedback, Product_Long, Product_Short, Question } from "./definitions";
 
 const backendURL = "http://localhost:8000";
 
@@ -181,5 +181,27 @@ export async function GetAnswers(questionID: number) {
         const questions: Answer[] = await data.json();
 
         return questions;
+    }
+}
+
+
+export async function ChatAI(form: ChatAIForm) {
+    await CheckBackend();
+
+    const data: Response = await fetch(backendURL + `/chat`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(form)
+    });
+
+    if(data.status == 404) {
+        return null;
+    } else {
+        const feedback: ChatAIFeedback = await data.json();
+
+        return feedback;
     }
 }
