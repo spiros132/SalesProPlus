@@ -7,6 +7,7 @@ import os
 from typing import Optional, Tuple
 from groq import Groq
 from dotenv import load_dotenv
+import json
 #pip install fastapi
 
 
@@ -85,7 +86,8 @@ def chat(chat: Chat):
 
             last_instruction = """
                 Give a summary of the result given here before;
-                If a articleID is in the result, format a link for the result like this localhost:8000/product/articleID and be sure to only have spaces next to the link to make it clickable;
+                Format it to html without body or html tags;
+                If a articleID is in the result, format a link for the result like this localhost:8000/product/articleID and put it in an anchor tag with the corresponding name;
                 Make it based on this question asked:
                 """
 
@@ -101,12 +103,12 @@ def chat(chat: Chat):
                 model="gemma2-9b-it",
             )
 
-            return {"answer": last_chat.choices[0].message.content}
+            return {"answer": last_chat.choices[0].message.content.replace("\n", "").strip()}
         else:
-            return {"answer": "We could not find an answer for your question, please try again."}
+            return {"error": "We could not find an answer for your question, please try again."}
     
-    except sqlite3.Error as e:
-        return {"error": str(e)}
+    except sqlite3.Error:
+        return {"error": "We could not find an answer for your question, please try again."}
 
 class Filter(BaseModel):
     min_price: Optional[int] = None
