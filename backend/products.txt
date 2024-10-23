@@ -1,2 +1,53 @@
-DONE: https://www.ikea.com/se/sv/p/ikea-ps-1995-klocka-bla-10575064/
-NOT DONE: https://www.ikea.com/se/sv/p/fridhult-baeddsoffa-knisa-ljusgra-70351725/
+
+-------------------------------------------------------------------------
+
+Bedroom:
+
+    DONE: https://www.ikea.com/se/sv/p/ikea-ps-1995-klocka-bla-10575064/
+    DONE: https://www.ikea.com/se/en/p/brimnes-wardrobe-with-3-doors-white-40407922/
+
+    Beds:
+
+        DONE: https://www.ikea.com/se/en/p/saeboevik-divan-bed-firm-vissle-grey-s69385750/
+        DONE: https://www.ikea.com/se/sv/p/slattum-klaedd-saengstomme-vissle-moerkgra-40571248/
+        DONE: https://www.ikea.com/se/en/p/idanaes-upholstered-storage-bed-gunnared-dark-grey-90447176/
+
+        Double Beds:
+
+        Sofa-beds:
+
+        Divan beds:
+
+    Lamps:
+
+    Mattresses:
+
+    Wardrobes:
+
+    Drawers:
+
+    Lighting:
+
+-------------------------------------------------------------------------
+
+Children's room:
+
+
+-------------------------------------------------------------------------
+
+Living room:
+
+-------------------------------------------------------------------------
+
+Kitchen:
+
+-------------------------------------------------------------------------
+
+Workspace:
+
+-------------------------------------------------------------------------
+
+Bathroom:
+
+-------------------------------------------------------------------------
+
