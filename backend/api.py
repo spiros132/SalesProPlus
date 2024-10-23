@@ -72,36 +72,38 @@ def chat(chat: Chat):
     try:
         cursor.execute(query)
         result = cursor.fetchall()
-        
-        column_names = [description[0] for description in cursor.description]
+        if result:
+            column_names = [description[0] for description in cursor.description]
 
-        formatted_list = []
-        for row in result:
-            row_dict = dict(zip(column_names, row))
-            row_string = " ".join([f"{key}: {value}" for key, value in row_dict.items()])
-            formatted_list.append(row_string)
+            formatted_list = []
+            for row in result:
+                row_dict = dict(zip(column_names, row))
+                row_string = " ".join([f"{key}: {value}" for key, value in row_dict.items()])
+                formatted_list.append(row_string)
 
-        formatted_result = ";".join(formatted_list)
+            formatted_result = ";".join(formatted_list)
 
-        last_instruction = """
-            Give a summary of the result given here before;
-            If a articleID is in the result, format a link for the result like this localhost:8000/product/articleID and be sure to only have spaces next to the link to make it clickable;
-            Make it based on this question asked:
-            """
+            last_instruction = """
+                Give a summary of the result given here before;
+                If a articleID is in the result, format a link for the result like this localhost:8000/product/articleID and be sure to only have spaces next to the link to make it clickable;
+                Make it based on this question asked:
+                """
 
-        last_question = formatted_result + " " + last_instruction + " " + chat.question
+            last_question = formatted_result + " " + last_instruction + " " + chat.question
 
-        last_chat = client.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": last_question,
-                }
-            ],
-            model="gemma2-9b-it",
-        )
+            last_chat = client.chat.completions.create(
+                messages=[
+                    {
+                        "role": "user",
+                        "content": last_question,
+                    }
+                ],
+                model="gemma2-9b-it",
+            )
 
-        return last_chat.choices[0].message.content
+            return {"answer": last_chat.choices[0].message.content}
+        else:
+            return {"answer": "The result was inconclusive."}
     
     except sqlite3.Error as e:
         return {"error": str(e)}
