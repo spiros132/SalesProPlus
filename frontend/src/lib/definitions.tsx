@@ -172,4 +172,5 @@ export interface ChatAIForm {
 
 export interface ChatAIFeedback {
     answer: string;
+    error: string | undefined;
 }
