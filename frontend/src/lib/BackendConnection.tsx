@@ -188,6 +188,8 @@ export async function GetAnswers(questionID: number) {
 export async function ChatAI(form: ChatAIForm) {
     await CheckBackend();
 
+    console.log(JSON.stringify(form));
+
     const data: Response = await fetch(backendURL + `/chat`, {
         method: "POST",
         headers: {

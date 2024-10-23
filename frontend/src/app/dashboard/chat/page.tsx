@@ -2,29 +2,14 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import ArrowIcon from "@/src/icons/arrowicon";
+import { ChatAI } from '@/src/lib/BackendConnection';
 
 interface ChatMessage {
     sender: "user" | "ai";
     message: string;
 }
 
-/*---------------------Den här ska bort när riktiga meddelanden läggs till------------------------ */
-function getLoremIpsum(min: number, max: number): string {
-    const loremIpsumString = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-    const count = Math.floor(Math.random() * (max - min + 1)) + min;
-    console.log(count);
-    const words = loremIpsumString.split(" ");
-    const slicedWords = words.slice(0, count);
-    const finalText = slicedWords.join(" ");
-    return finalText;
-};
-
-/*------------------------------------------------------------------------------------------------ */
-
 export default function Chat() {
-
-
-
     const [inputValue, setInputValue] = useState('');
     const [chat, updateChat] = useState<ChatMessage[]>([]);
     const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -34,17 +19,31 @@ export default function Chat() {
     };
 
     const handleClick = () => {
-        const newMessage: ChatMessage = {sender: "user", message: inputValue}
-        const updatedChat = [...chat, newMessage];
         setInputValue("");
-
-        /*--------------------Kalla api och byt ut mot riktigt svar från ai----------------*/
-        const response: ChatMessage = {sender: "ai", message: getLoremIpsum(10,30)}
-        updatedChat.push(response);
-        /**------------------------------------------------------------------------------- */
-
+        const newMessage: ChatMessage = {sender: "user", message: inputValue}
+        let updatedChat = [...chat, newMessage];
         updateChat(updatedChat);
 
+        ChatAI({question: inputValue})
+        .then((response) => {
+            updatedChat = [...chat, newMessage];
+            
+            if(response) {
+                let message: ChatMessage;
+                if(response.error)
+                    message = {sender: "ai", message: response.error};
+                else 
+                    message = {sender: "ai", message: response.answer};
+
+                updatedChat.push(message);
+            }
+            else {
+                const message: ChatMessage = {sender: "ai", message: "Something wrong happened, please try again later!"}
+                updatedChat.push(message);
+            }
+
+            updateChat(updatedChat);
+        });
     };
 
     useEffect(() => {
