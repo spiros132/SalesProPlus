@@ -107,10 +107,21 @@ except sqlite3.Error as e:
 # Insert data into Materials
 try:
     cursor.execute(
-        """INSERT INTO Materials (name, country, emission) VALUES (
+        """INSERT INTO Materials (name, country, emission) VALUES 
+        (
             "Steel", 
             "Sweden", 
             1
+        ),
+                (
+            "Polyester", 
+            "Austria", 
+            4
+        ),
+        (
+            "Polyurethane", 
+            "Norway", 
+            17
         );
         """
     )
@@ -122,10 +133,21 @@ except sqlite3.Error as e:
 # Insert data into ProductMaterials
 try:
     cursor.execute(
-        """INSERT INTO ProductMaterials (material, part, articleId) VALUES (
+        """INSERT INTO ProductMaterials (material, part, articleId) VALUES 
+        (
             "Steel",
             "frame",
             10575064
+        ),
+        (
+            "Polyester",
+            "headboard",
+            40571248
+        ),
+        (
+            "Polyurethane",
+            "headboard",
+            40571248
         );
         """
     )
