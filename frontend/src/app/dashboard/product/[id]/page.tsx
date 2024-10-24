@@ -45,8 +45,8 @@ export default function Products({params} : {
 
     return <div>
         {/* Image */}
-        <Skeleton isLoaded={isLoaded} className="p-3 m-2">
-            <img alt={product?.description} src={product?.image}></img>
+        <Skeleton isLoaded={isLoaded} className="p-3 m-2 w-full">
+            <img className="w-full" alt={product?.description} src={product?.image}></img>
         </Skeleton>
 
         {/* Description */}
