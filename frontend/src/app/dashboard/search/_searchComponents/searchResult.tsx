@@ -21,8 +21,8 @@ export default function SearchResult({ product }: { readonly product: Product_Sh
           <Image
             src={product.image}
             alt={product.name}
-            width={50}
-            height={50}
+            width={250}
+            height={250}
             className="w-[50%]"
           />
           <div className="h-[80%]">
