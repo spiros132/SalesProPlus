@@ -111,7 +111,7 @@ def chat(chat: Chat):
                 Give a nice and pleasent and not to short summary of the result given based on the question asked by the user and its corresponding query;
                 Always only present the relevant information based on the question;
                 Format it to html without body or html tags;
-                If a articleID is in the result, format a link for the result like this http://localhost:3000/product/articleID and put it in an anchor tag with the corresponding name;
+                If a articleID is in the result, format a link for the result like this http://localhost:3000/dashboard/product/articleID and put it in an anchor tag with the corresponding name;
                 The article ID must be the one provided in the result;
                 """
             
