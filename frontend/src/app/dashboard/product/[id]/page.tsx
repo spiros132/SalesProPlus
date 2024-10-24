@@ -45,8 +45,8 @@ export default function Products({params} : {
 
     return <div>
         {/* Image */}
-        <Skeleton isLoaded={isLoaded} className="p-3 m-2">
-            <img alt={product?.description} src={product?.image}></img>
+        <Skeleton isLoaded={isLoaded} className="p-3 m-2 w-full">
+            <img className="w-full" alt={product?.description} src={product?.image}></img>
         </Skeleton>
 
         {/* Description */}
@@ -54,7 +54,10 @@ export default function Products({params} : {
             <Skeleton isLoaded={isLoaded} className="text-3xl font-bold rounded-md m-2">{product?.name}</Skeleton>
             <Skeleton isLoaded={isLoaded} className="py-2 m-2">
                 <p className="text-md">{product?.category}, {product?.materials}</p>
-                <p className="text-md">{dimensions?.depth}x{dimensions?.width}x{dimensions?.height} cm</p>
+                <p className="text-md">
+                    {dimensions?.depth != null ? dimensions.depth + 'x' : ''}
+                    {dimensions?.width != null ? dimensions.width + 'x': ''}
+                    {dimensions?.height != null ? dimensions.height: ''} cm</p>
             </Skeleton>
             <Skeleton isLoaded={isLoaded} className="m-2">
                 <p className={"before:inline-block before:mr-1 before:rounded-full before:w-3 before:h-3 before:" + ((product?.stock != null && product?.stock > 0) ? "bg-green-500" : "bg-red-500")}>
