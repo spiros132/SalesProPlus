@@ -90,7 +90,7 @@ export default function Products({params} : {
                     {isLoaded && product?.materials?.map((material, index) => (
                         <div key={index}>
                             <Link href={`/dashboard/materials/${material.id}`}>
-                                <a>{material.name}</a>
+                                <a className="purpleLink">{material.name}</a>
                             </Link>
                             <span> ({material.part})</span>
                         </div>

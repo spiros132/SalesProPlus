@@ -6,3 +6,7 @@ a {
     color:black;
     text-decoration: none;
 }
+.purpleLink{
+    color:purple;
+    text-decoration: underline;
+}
