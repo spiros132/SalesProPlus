@@ -30,9 +30,14 @@ create table ProductCategories (
 );
 
 create table Materials (
-    name TEXT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT KEY,
     country TEXT,
-    emission int
+    emissions int,
+    emission_unit TEXT, 
+    recycling int,
+    image TEXT NOT NULL, 
+    description TEXT NOT NULL
 );
 
 CREATE TABLE ProductInformation (
@@ -59,7 +64,7 @@ CREATE TABLE ProductDimensions (
 );
 
 CREATE TABLE ProductMaterials (
-    material TEXT REFERENCES Materials(name),
+    material int REFERENCES Materials(id),
     articleID INT REFERENCES Products(articleID),
     part TEXT NOT NULL,
     PRIMARY KEY (material, articleID)

@@ -259,17 +259,20 @@ def product_page(id: int):
             pi.safety, 
             pi.manuals, 
             pi.category,
+            pc.categoryName as category_name,
             pd.unit,
             pd.height,
             pd.width,
             pd.depth,
             pd.length,
             pd.packaging,
-            GROUP_CONCAT(pm.material, ', ') AS materials
+        GROUP_CONCAT(m.id || '|' || m.name || '|' || pm.part, ', ') AS materials
         FROM Products p
         LEFT JOIN ProductInformation pi ON p.articleID = pi.articleID
         LEFT JOIN ProductDimensions pd ON p.articleID = pd.articleID
         left join ProductMaterials pm on p.articleID = pm.articleID
+        left join Materials m on pm.material = m.id
+        left join ProductCategories pc on pi.category = pc.categoryID
         WHERE p.articleID = ?
         GROUP BY p.articleID;
         """, (id,))
@@ -291,13 +294,12 @@ def product_page(id: int):
 def material_page(id: int):
 
     db = sqlite3.connect(DB_PATH)
-
     cursor =  db.cursor()
     cursor.execute("""
         SELECT
         *
-        FROM materials
-        WHERE materialID = ?;
+        FROM Materials
+        WHERE id = ?;
         """, (id,))
     
     result = cursor.fetchone()

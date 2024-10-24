@@ -6,21 +6,17 @@ import { Accordion, AccordionItem } from "@nextui-org/accordion";
 import {  GetMaterial } from "@/src/lib/BackendConnection"; // Assuming you have a GetMaterial function
 import { Material } from "@/src/lib/definitions"; // Assuming you have a Material type defined
 
-export default function Products({params} : {
-    readonly params: {id: string}
-}) {
+export default function MaterialPage({ params }: { params: { id: string } }) {
     const [material, setMaterial] = useState<Material>();
 
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
     useEffect(() => {
         const materialIDStr = params.id;
-        
         if(materialIDStr == null)
             return;
 
         const materialID = Number.parseInt(materialIDStr);
-
         GetMaterial(materialID)
         .then((m) => {
             if(m == null) {
@@ -29,7 +25,6 @@ export default function Products({params} : {
             else {
                 // Get all data from the product
                 setMaterial(m);
-
                 // Load the elements in the site
                 setIsLoaded(true);
             }

@@ -120,9 +120,10 @@ export interface Product_Long {
     description: string;
     info_description: string;
     category: string;
+    category_name: string;
     designer: string;
     info: string;
-    materials: string;
+    materials: Material_Short[] | null;
     safety: string;
     manuals: string;
     unit: string;
@@ -131,6 +132,34 @@ export interface Product_Long {
     depth: number | null;
     length: number | null;
     packaging: string;
+}
+export interface InitialProduct {
+    dimensions(dimensions: any): unknown;
+    articleID: number;
+    name: string;
+    price: number;
+    stock: number;
+    image: string;
+    description: string;
+    info_description: string;
+    category: string;
+    category_name: string;
+    designer: string;
+    info: string;
+    materials: string | null;
+    safety: string;
+    manuals: string;
+    unit: string;
+    height: number | null;
+    width: number | null;
+    depth: number | null;
+    length: number | null;
+    packaging: string;
+}
+export interface Material_Short {
+    id:number;
+    name: string;
+    part: string;
 }
 
 export interface LoginFeedback {

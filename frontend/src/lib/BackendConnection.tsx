@@ -1,7 +1,7 @@
 'use client';
 
 import Error, { ErrorProps } from "next/error";
-import { Answer, Category, ChatAIFeedback, ChatAIForm, CreateAnswerFeedback, CreateAnswerForm, CreateQuestionFeedback, CreateQuestionForm, Filters, LoginFeedback, Material, Product_Long, Product_Short, Question } from "./definitions";
+import { Answer, Category, ChatAIFeedback, ChatAIForm, CreateAnswerFeedback, CreateAnswerForm, CreateQuestionFeedback, CreateQuestionForm, Filters, InitialProduct, LoginFeedback, Material, Material_Short, Product_Long, Product_Short, Question } from "./definitions";
 
 const backendURL = "http://localhost:8000";
 
@@ -22,10 +22,9 @@ export async function CheckBackend(): Promise<boolean> {
 }
 export async function GetMaterial(materialID: number): Promise<Material | null> {
     await CheckBackend();
-    
     // Get data from the backend
-    const data: Response = await fetch(backendURL + `/material/${materialID}`);
-
+    const data: Response = await fetch(backendURL + `/materials/${materialID}`);
+    
     // Check that we got the correct response
     if(data.status == 404) {
         return null;
@@ -47,8 +46,23 @@ export async function GetProduct(productID: number): Promise<Product_Long | null
         return null;
     } else {
         // Cast the json to the Product Long interface
-        const product: Product_Long = await data.json();
-        return product;
+        const product: InitialProduct = await data.json();
+        var m: Material_Short[] = [];
+        // Parse the materials string into an array of Material_Short objects
+        if (product.materials) {
+            m = product.materials.split(', ').map((materialStr: string) => {
+            const [id, name, part] = materialStr.split('|');
+            return { id: Number(id), name, part } as Material_Short;
+            });
+        }
+
+        const productLong: Product_Long = {
+            ...product,
+            materials: m
+        };
+        console.log(productLong);
+        return productLong;
+        
     }
 }
 

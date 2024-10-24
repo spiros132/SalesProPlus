@@ -107,21 +107,35 @@ except sqlite3.Error as e:
 # Insert data into Materials
 try:
     cursor.execute(
-        """INSERT INTO Materials (name, country, emission) VALUES 
+        """INSERT INTO Materials (name, country, emissions, emission_unit, recycling, image, description) VALUES 
         (
             "Steel", 
             "Sweden", 
-            1
+            2, 
+            "kg (CO2)/kg steel",
+            80,
+            "https://5.imimg.com/data5/IJ/DB/MY-997053/stainless-steel-round-bar-304l-500x500.jpg",
+            "Steel is a strong, durable, and versatile alloy made primarily of iron and a small percentage of carbon, which enhances its strength and hardness. Known for its excellent mechanical properties, such as high tensile strength and resistance to deformation, steel is widely used in construction, transportation, manufacturing, and infrastructure. It can be easily shaped, welded, and treated to achieve different grades and finishes, making it adaptable to a range of applications. Additionally, steel is highly recyclable, retaining its properties through multiple recycling processes, making it both a critical and sustainable material in modern industry."
         ),
-                (
+            (
             "Polyester", 
             "Austria", 
-            4
+            5,
+            "kg CO2/kg polyester",
+            95,
+            "https://www.poundametre.com/cdn/shop/articles/what-is-polyester-fabric-a-brief-introduction-427550.jpg?v=1695352842&width=1000",
+            "Polyester is a synthetic polymer made primarily from petroleum-based products, most commonly polyethylene terephthalate (PET). It is widely used in textiles for clothing, home furnishings, and industrial products due to its durability, wrinkle resistance, and quick-drying properties. Polyester fabrics are lightweight, strong, and retain their shape well, making them popular in activewear and outdoor gear.
+            However, polyester is not biodegradable, and its production is energy-intensive, contributing to environmental concerns. In response, recycled polyester (rPET), made from post-consumer plastic waste, is gaining popularity as a more sustainable alternative that reduces plastic waste and lowers greenhouse gas emissions compared to virgin polyester production."
         ),
         (
             "Polyurethane", 
             "Norway", 
-            17
+            6,
+            "kg CO2/kg polyurethane",
+            10,
+            "https://www.gteek.com/image/cache/catalog/rubber/PUR/polyurethane-rods-50-Shore-A-on-stock-1200x900.jpg",
+            "Polyurethane is a versatile polymer composed of organic units joined by urethane links, often derived from petroleum products. It comes in many forms, including foams, elastomers, and coatings, and is widely used across various industries. Common applications include cushioning materials for furniture and mattresses, thermal insulation in buildings and appliances, and as coatings or adhesives for surfaces and products.
+            Polyurethane is valued for its flexibility, durability, and resistance to wear and tear, water, and chemicals. It can be formulated to be soft and flexible (e.g., foam) or tough and rigid (e.g., for insulation). However, like other petroleum-based materials, polyurethane is non-biodegradable and poses environmental challenges, particularly in terms of waste disposal and its carbon footprint during production. Efforts are underway to develop bio-based polyurethanes and improve recycling techniques to mitigate these environmental impacts."
         );
         """
     )
@@ -135,17 +149,17 @@ try:
     cursor.execute(
         """INSERT INTO ProductMaterials (material, part, articleId) VALUES 
         (
-            "Steel",
+            "1",
             "frame",
             10575064
         ),
         (
-            "Polyester",
+            "2",
             "headboard",
             40571248
         ),
         (
-            "Polyurethane",
+            "3",
             "headboard",
             40571248
         );

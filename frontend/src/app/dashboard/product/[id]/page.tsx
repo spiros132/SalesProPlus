@@ -6,7 +6,7 @@ import { Accordion, AccordionItem } from "@nextui-org/accordion";
 import { Divider } from "@nextui-org/divider";
 import { Link } from "@nextui-org/link";
 
-import { Dimensions, Product_Long } from "@/src/lib/definitions";
+import { Dimensions, Material_Short, Product_Long } from "@/src/lib/definitions";
 import { GetProduct } from "@/src/lib/BackendConnection";
 import Questions from "./_productComponents/questions";
 
@@ -15,7 +15,6 @@ export default function Products({params} : {
 }) {
     const [product, setProduct] = useState<Product_Long>();
     const [dimensions, setDimensions] = useState<Dimensions>();
-
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
     useEffect(() => {
@@ -35,7 +34,6 @@ export default function Products({params} : {
                 // Get all data from the product
                 setProduct(product);
                 setDimensions(product as Dimensions);
-
                 // Load the elements in the site
                 setIsLoaded(true);
             }
@@ -53,7 +51,7 @@ export default function Products({params} : {
         <div className="p-5">
             <Skeleton isLoaded={isLoaded} className="text-3xl font-bold rounded-md m-2">{product?.name}</Skeleton>
             <Skeleton isLoaded={isLoaded} className="py-2 m-2">
-                <p className="text-md">{product?.category}, {product?.materials}</p>
+                <p className="text-md">{product?.category_name}</p>
                 <p className="text-md">
                     {dimensions?.depth != null ? dimensions.depth + 'x' : ''}
                     {dimensions?.width != null ? dimensions.width + 'x': ''}
@@ -85,6 +83,18 @@ export default function Products({params} : {
                     
                     <h2 className="text-lg font-bold">Packaging</h2>
                     <p className="text-md">{product?.packaging}</p>
+
+                    <Divider className="my-2" />
+                    
+                    <h2 className="text-lg font-bold">Materials</h2>
+                    {isLoaded && product?.materials?.map((material, index) => (
+                        <div key={index}>
+                            <Link href={`/dashboard/materials/${material.id}`}>
+                                <a>{material.name}</a>
+                            </Link>
+                            <span> ({material.part})</span>
+                        </div>
+                    ))}
                 </AccordionItem>
                 <AccordionItem title="Manuals and Safety">
                     <h2 className="text-lg font-bold">Manual(s)</h2>
