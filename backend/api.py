@@ -150,7 +150,20 @@ def search_prompt(q: Optional[str] = None, filters: Filter = Depends()):
         query += "WHERE ProductsFTS MATCH ?"
         params.append(q)
 
- 
+    if filters.category is not None:
+        subcategories = """WITH RECURSIVE subcategories AS (
+        SELECT categoryID
+        FROM ProductCategories
+        WHERE categoryID = ?
+        UNION ALL
+        SELECT pc.categoryID
+        FROM ProductCategories pc
+        INNER JOIN subcategories sc ON pc.parent = sc.categoryID
+        )"""
+        query = subcategories + query
+        query += " AND pi.category IN (SELECT categoryID FROM subcategories)"
+        params.append(filters.category)
+        
     if filters.min_price:
         query += " AND p.price >= ?"
         params.append(filters.min_price)
@@ -190,19 +203,7 @@ def search_prompt(q: Optional[str] = None, filters: Filter = Depends()):
         query += " AND pd.length <= ?"
         params.append(filters.max_length)
 
-    if filters.category is not None:
-        subcategories = """WITH RECURSIVE subcategories AS (
-        SELECT categoryID
-        FROM ProductCategories
-        WHERE categoryID = ?
-        UNION ALL
-        SELECT pc.categoryID
-        FROM ProductCategories pc
-        INNER JOIN subcategories sc ON pc.parent = sc.categoryID
-        ) """
-        query = subcategories + query
-        query += " AND pi.category IN (SELECT categoryID FROM subcategories)"
-        params.append(filters.category)
+    
 
     query += " ORDER BY BM25(ProductsFTS)"
     
