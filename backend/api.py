@@ -48,6 +48,8 @@ def chat(chat: Chat):
     first_instruction = """
         Following this exact schema, make a query using relevant columns or rows that are guaranteed present in the schema; 
         never ever make up any fields to avoid errors; Always use the exact names of the fields to avoid errors;
+        Items may not have descriptive names, so when looking for items, use categories or other fields to identify them. ;
+        The query should not contain anything other than the actual query;
         Always include all columns from the tables in the query using the select all asterisk and join to include the name always; Do not output anything else than the actual query no comment or descriptions or anything at all other than the query; Make the query based on this question:
         """
 
@@ -64,7 +66,7 @@ def chat(chat: Chat):
     )
 
     query = first_chat.choices[0].message.content
-    print(query)
+    print("Q" + query)
 
     db = sqlite3.connect(DB_PATH)
 
@@ -87,12 +89,13 @@ def chat(chat: Chat):
             last_instruction = """
                 Give a summary of the result given here before;
                 Format it to html without body or html tags;
-                If a articleID is in the result, format a link for the result like this localhost:8000/product/articleID and put it in an anchor tag with the corresponding name;
+                If a articleID is in the result, format a link for the result like this http://localhost:3000/product/articleID and put it in an anchor tag with the corresponding name;
+                The article ID must be the one provided in the result;
                 Make it based on this question asked:
                 """
 
             last_question = formatted_result + " " + last_instruction + " " + chat.question
-
+            print(last_question)
             last_chat = client.chat.completions.create(
                 messages=[
                     {
@@ -107,8 +110,9 @@ def chat(chat: Chat):
         else:
             return {"error": "We could not find an answer for your question, please try again."}
     
-    except sqlite3.Error:
-        return {"error": "We could not find an answer for your question, please try again."}
+    except sqlite3.Error as e:
+        print(e)
+        return {"error": "There was an error, please try again."}
 
 class Filter(BaseModel):
     min_price: Optional[int] = None

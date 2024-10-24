@@ -65,9 +65,7 @@ export default function Chat() {
                     const sender = message.sender === 'user' ? 'items-end' : 'items-start';
                     return (
                         <div key={index} className={`w-full flex flex-col ${sender}`}>
-                            <div className='bg-chatBgGray m-2 rounded-xl p-3 max-w-[65%] w-fit'>
-                                {message.message}
-                            </div>                    
+                            <div className='bg-chatBgGray m-2 rounded-xl p-3 max-w-[65%] w-fit' dangerouslySetInnerHTML={{ __html: message.message }} />
                         </div>
                     )
 
@@ -82,7 +80,7 @@ export default function Chat() {
                     type="text" 
                     value={inputValue}
                     onChange={handleChange}
-                    placeholder='Placeholder...'
+                    placeholder='Ask...'
                 />
                 <button 
                     className='w-[5vh] h-[5vh] p-[0.8rem] bg-chatBgGray rounded-full m-2'
