@@ -55,7 +55,7 @@ def chat(chat: Chat):
         When searching, always ignore cases with WHERE UPPER(COL_NAME) LIKE UPPER('%\search\%');
         Items may not have descriptive names, so when looking for items, use categories or other fields to identify them.;
         The query should not contain anything other than the actual query, it should be able to be run as a it is from the result;
-        Always include all relevant columns from the tables in the query and join to include the name always, when searching a ProductCategory you get the referenced category from productInformation; 
+        Always include all columns from the tables using the sql asterisk in the select of the query and join to include the name always, when searching a ProductCategory you get the referenced category from productInformation; 
         Do not output anything else than the actual query no comment or descriptions or anything at all other than the query; 
         Make the query based on the user question; You will also get the categories that exist here:
         """
@@ -108,7 +108,7 @@ def chat(chat: Chat):
             print(formatted_list)
 
             last_instruction = """
-                Give a summary of the result given based on the question asked by the user and its corresponding query;
+                Give a nice and pleasent and not to short summary of the result given based on the question asked by the user and its corresponding query;
                 Always only present the relevant information based on the question;
                 Format it to html without body or html tags;
                 If a articleID is in the result, format a link for the result like this http://localhost:3000/product/articleID and put it in an anchor tag with the corresponding name;
