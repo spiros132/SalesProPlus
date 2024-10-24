@@ -287,6 +287,33 @@ def product_page(id: int):
     else:
         return HTTPException(status_code=404, detail="No products Found")
 
+@app.get("/materials/{id}")
+def material_page(id: int):
+
+    db = sqlite3.connect(DB_PATH)
+
+    cursor =  db.cursor()
+    cursor.execute("""
+        SELECT
+        *
+        FROM materials
+        WHERE materialID = ?;
+        """, (id,))
+    
+    result = cursor.fetchone()
+    
+    column_names = [description[0] for description in cursor.description]
+
+    cursor.close()
+    db.close()
+    
+    
+    if result:
+        return dict(zip(column_names, result))
+    else:
+        return HTTPException(status_code=404, detail="No material Found")
+
+
 class LoginForm(BaseModel):
     username: str
     password: str

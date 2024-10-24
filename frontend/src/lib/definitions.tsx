@@ -97,7 +97,15 @@ export interface Product_Short {
     length: number | null;
     packaging: string;
 }
-
+export interface Material {
+    id: number;
+    name: string;
+    description: string;
+    image: string;
+    country: string;
+    emissions: number;
+    emission_unit: string;
+}
 
 /**
  * The product interface when going into the product page itself

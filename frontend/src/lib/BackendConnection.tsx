@@ -1,7 +1,7 @@
 'use client';
 
 import Error, { ErrorProps } from "next/error";
-import { Answer, Category, ChatAIFeedback, ChatAIForm, CreateAnswerFeedback, CreateAnswerForm, CreateQuestionFeedback, CreateQuestionForm, Filters, LoginFeedback, Product_Long, Product_Short, Question } from "./definitions";
+import { Answer, Category, ChatAIFeedback, ChatAIForm, CreateAnswerFeedback, CreateAnswerForm, CreateQuestionFeedback, CreateQuestionForm, Filters, LoginFeedback, Material, Product_Long, Product_Short, Question } from "./definitions";
 
 const backendURL = "http://localhost:8000";
 
@@ -205,5 +205,20 @@ export async function ChatAI(form: ChatAIForm) {
         const feedback: ChatAIFeedback = await data.json();
 
         return feedback;
+    }
+
+    export async function GetMaterial(materialID: number): Promise<Material | null> {
+        await CheckBackend();
+        
+        // Get data from the backend
+        const data: Response = await fetch(backendURL + `/material/${materialID}`);
+    
+        // Check that we got the correct response
+        if(data.status == 404) {
+            return null;
+        } else {
+            // Cast the json to the Product Long interface
+            const material: Material = await data.json();
+            return material;
     }
 }
