@@ -232,7 +232,7 @@ Adjustable shelves make it easy to customise the space according to your needs.
 Of course your home should be a safe place for the entire family. That’s why a safety fitting is included so that you can attach the wardrobe to the wall.", 
             "K Hagberg/M Hagberg", 
             NULL, 
-            "bedroom",
+            "wardrobes",
             "WARNING! TIPPING HAZARD – Unanchored furniture can tip over. This furniture shall be anchored to the wall with the enclosed safety fitting to prevent it from tipping over.", 
             "https://www.ikea.com/se/en/assembly_instructions/brimnes-wardrobe-with-3-doors-white__AA-2207256-3-100.pdf"
         ),
@@ -253,7 +253,7 @@ A layer of foam on the top adds comfort.
 Soft quilted stretch cover with added wadding.", 
             "Paulin Machado", 
             NULL, 
-            "bedroom",
+            "mattresses",
             "This mattress has been tested and meets the requirements for durability set forth by standard EN 1957, and flammability requirements set forth by EN 597-1.", 
             "https://www.ikea.com/se/en/manuals/vesteroey-pocket-sprung-mattress-medium-firm-light-blue__AA-2369518-1-100.pdf"
         );
