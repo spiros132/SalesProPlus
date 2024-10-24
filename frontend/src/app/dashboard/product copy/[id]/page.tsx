@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Skeleton } from "@nextui-org/skeleton";
 import { Accordion, AccordionItem } from "@nextui-org/accordion";
-import { GetMaterial } from "@/src/lib/BackendConnection"; // Assuming you have a GetMaterial function
+import {  GetMaterial } from "@/src/lib/BackendConnection"; // Assuming you have a GetMaterial function
 import { Material } from "@/src/lib/definitions"; // Assuming you have a Material type defined
 
 export default function Products({params} : {
@@ -14,12 +14,12 @@ export default function Products({params} : {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
     useEffect(() => {
-        const materialID = params.id;
+        const materialIDStr = params.id;
         
-        if(materialID == null)
+        if(materialIDStr == null)
             return;
 
-        const materialID = Number.parseInt(materialID);
+        const materialID = Number.parseInt(materialIDStr);
 
         GetMaterial(materialID)
         .then((m) => {

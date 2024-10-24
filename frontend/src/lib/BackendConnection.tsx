@@ -20,6 +20,21 @@ export async function CheckBackend(): Promise<boolean> {
         throw new Error(props);
     }
 }
+export async function GetMaterial(materialID: number): Promise<Material | null> {
+    await CheckBackend();
+    
+    // Get data from the backend
+    const data: Response = await fetch(backendURL + `/material/${materialID}`);
+
+    // Check that we got the correct response
+    if(data.status == 404) {
+        return null;
+    } else {
+        // Cast the json to the Material interface
+        const material: Material = await data.json();
+        return material;
+    }
+}
 
 export async function GetProduct(productID: number): Promise<Product_Long | null> {
     await CheckBackend();
@@ -207,18 +222,4 @@ export async function ChatAI(form: ChatAIForm) {
         return feedback;
     }
 
-    export async function GetMaterial(materialID: number): Promise<Material | null> {
-        await CheckBackend();
-        
-        // Get data from the backend
-        const data: Response = await fetch(backendURL + `/material/${materialID}`);
-    
-        // Check that we got the correct response
-        if(data.status == 404) {
-            return null;
-        } else {
-            // Cast the json to the Product Long interface
-            const material: Material = await data.json();
-            return material;
-    }
 }

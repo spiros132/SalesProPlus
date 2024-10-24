@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 a {
-    color:black;
-    text-decoration: none;
+    color:blueviolet;
+    text-decoration: underline;
 }

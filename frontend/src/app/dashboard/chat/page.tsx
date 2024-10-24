@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ArrowIcon from "@/src/icons/arrowicon";
 import { ChatAI } from '@/src/lib/BackendConnection';
+import '@/styles/chat.css';
 
 interface ChatMessage {
     sender: "user" | "ai";
