@@ -57,6 +57,7 @@ def chat(chat: Chat):
         The query should not contain anything other than the actual query, it should be able to be run as a it is from the result;
         Always include all columns from the tables using the sql asterisk in the select of the query and join to include the name always, when searching a ProductCategory you get the referenced category from productInformation; 
         Do not output anything else than the actual query no comment or descriptions or anything at all other than the query; 
+        If the question is asking for a calculation, you will provide a SQL query that calculates the result based on the data in the database;
         Make the query based on the user question; You will also get the categories that exist here:
         """
     
@@ -108,7 +109,9 @@ def chat(chat: Chat):
             print(formatted_list)
 
             last_instruction = """
-                Give a nice and pleasent and not to short summary of the result given based on the question asked by the user and its corresponding query;
+                You are a support agent, you will use the results from SQL and will use it to give a response to the question asked;
+                The response must be readable by the user, and contain factual information based on the query result. 
+                You will not mention anything about the query or the database, only the information that is relevant to the user;
                 Always only present the relevant information based on the question;
                 Format it to html without body or html tags;
                 If a articleID is in the result, format a link for the result like this http://localhost:3000/dashboard/product/articleID and put it in an anchor tag with the corresponding name;
