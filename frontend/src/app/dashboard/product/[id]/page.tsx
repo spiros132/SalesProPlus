@@ -57,7 +57,7 @@ export default function Products({params} : {
                 <p className="text-md">
                     {dimensions?.depth != null ? dimensions.depth + 'x' : ''}
                     {dimensions?.width != null ? dimensions.width + 'x': ''}
-                    {dimensions?.height != null ? dimensions.height + 'x': ''} cm</p>
+                    {dimensions?.height != null ? dimensions.height: ''} cm</p>
             </Skeleton>
             <Skeleton isLoaded={isLoaded} className="m-2">
                 <p className={"before:inline-block before:mr-1 before:rounded-full before:w-3 before:h-3 before:" + ((product?.stock != null && product?.stock > 0) ? "bg-green-500" : "bg-red-500")}>
