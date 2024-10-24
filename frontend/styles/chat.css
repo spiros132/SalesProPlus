@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-a {
+.chat a {
     color:blueviolet;
     text-decoration: underline;
 }

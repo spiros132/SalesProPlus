@@ -60,7 +60,7 @@ export default function Chat() {
 
     return (
     <div>
-        <div className='h-[77vh] text-chatFontGray'>
+        <div className='h-[77vh] text-chatFontGray chat'>
             <div className='h-full overflow-y-auto pb-[12vh]' ref={chatContainerRef}>
                 {chat.map((message, index) => {
                     const sender = message.sender === 'user' ? 'items-end' : 'items-start';
