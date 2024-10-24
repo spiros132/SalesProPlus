@@ -191,7 +191,17 @@ def search_prompt(q: Optional[str] = None, filters: Filter = Depends()):
         params.append(filters.max_length)
 
     if filters.category is not None:
-        query += " AND pi.category = ?"
+        subcategories = """WITH RECURSIVE subcategories AS (
+        SELECT categoryID
+        FROM ProductCategories
+        WHERE categoryID = ?
+        UNION ALL
+        SELECT pc.categoryID
+        FROM ProductCategories pc
+        INNER JOIN subcategories sc ON pc.parent = sc.categoryID
+        ) """
+        query = subcategories + query
+        query += " AND pi.category IN (SELECT categoryID FROM subcategories)"
         params.append(filters.category)
 
     query += " ORDER BY BM25(ProductsFTS)"
