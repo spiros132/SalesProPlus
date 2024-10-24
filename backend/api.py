@@ -45,32 +45,51 @@ def chat(chat: Chat):
     sqlFile = fd.read()
     fd.close()
 
+    db = sqlite3.connect(DB_PATH)
+
+    cursor =  db.cursor()
+
     first_instruction = """
         Following this exact schema, make a query using relevant columns or rows that are guaranteed present in the schema; 
         never ever make up any fields to avoid errors; Always use the exact names of the fields to avoid errors;
-        Items may not have descriptive names, so when looking for items, use categories or other fields to identify them. ;
-        The query should not contain anything other than the actual query;
-        Always include all columns from the tables in the query using the select all asterisk and join to include the name always; Do not output anything else than the actual query no comment or descriptions or anything at all other than the query; Make the query based on this question:
+        When searching, always ignore cases with WHERE UPPER(COL_NAME) LIKE UPPER('%\search\%');
+        Items may not have descriptive names, so when looking for items, use categories or other fields to identify them.;
+        The query should not contain anything other than the actual query, it should be able to be run as a it is from the result;
+        Always include all relevant columns from the tables in the query and join to include the name always, when searching a ProductCategory you get the referenced category from productInformation; 
+        Do not output anything else than the actual query no comment or descriptions or anything at all other than the query; 
+        Make the query based on the user question; You will also get the categories that exist here:
         """
+    
+    cursor.execute("SELECT c.* FROM ProductCategories c")
+    result = cursor.fetchall()
 
-    first_question =  sqlFile.strip() + " " + first_instruction + " " + chat.question
+    column_names = [description[0] for description in cursor.description]
 
+    formatted_list = []
+    for row in result:
+        row_dict = dict(zip(column_names, row))
+        row_string = " ".join([f"{key}: {value}" for key, value in row_dict.items()])
+        formatted_list.append(row_string)
+
+    formatted_result = ";".join(formatted_list)
+    
     first_chat = client.chat.completions.create(
         messages=[
             {
+                "role": "system",
+                "content": sqlFile.strip() + " " + first_instruction + " " + formatted_result
+            },
+            {
                 "role": "user",
-                "content": first_question,
-            }
+                "content": chat.question,
+            },
         ],
         model="gemma2-9b-it",
+        temperature=0,
     )
 
     query = first_chat.choices[0].message.content
     print("Q" + query)
-
-    db = sqlite3.connect(DB_PATH)
-
-    cursor =  db.cursor()
 
     try:
         cursor.execute(query)
@@ -86,24 +105,29 @@ def chat(chat: Chat):
 
             formatted_result = ";".join(formatted_list)
 
+            print(formatted_list)
+
             last_instruction = """
-                Give a summary of the result given here before;
+                Give a summary of the result given based on the question asked by the user and its corresponding query;
+                Always only present the relevant information based on the question;
                 Format it to html without body or html tags;
                 If a articleID is in the result, format a link for the result like this http://localhost:3000/product/articleID and put it in an anchor tag with the corresponding name;
                 The article ID must be the one provided in the result;
-                Make it based on this question asked:
                 """
-
-            last_question = formatted_result + " " + last_instruction + " " + chat.question
-            print(last_question)
+            
             last_chat = client.chat.completions.create(
                 messages=[
                     {
+                        "role": "system",
+                        "content": query + " " + formatted_result + " " + last_instruction
+                    },
+                    {
                         "role": "user",
-                        "content": last_question,
+                        "content": chat.question,
                     }
                 ],
                 model="gemma2-9b-it",
+                temperature=0,
             )
 
             return {"answer": last_chat.choices[0].message.content.replace("\n", "").strip()}

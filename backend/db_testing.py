@@ -23,7 +23,7 @@ try:
         (
             10575064, 
             "IKEA PS 1995",
-            "https://www.ikea.com/se/sv/images/products/ikea-ps-1995-klocka-bla__1277238_pe931019_s5.jpg",
+            "https://www.ikea.com/se/sv/images/products/ikea-ps-1995-klocka-bla__1277238_pe931019_s5.jpg?width=500",
             499, 
             2, 
             "The IKEA PS 1995 clock shows the time and is also an eye-catching decoration in your home. You can hang it on the wall or put it on a shelf - and open the front of the clock and store small things."
@@ -31,7 +31,7 @@ try:
         (
             69385750, 
             "SÄBÖVIK",
-            "https://www.ikea.com/se/en/images/products/saeboevik-divan-bed-firm-vissle-grey__0891216_pe782251_s5.jpg?f=u",
+            "https://www.ikea.com/se/en/images/products/saeboevik-divan-bed-firm-vissle-grey__0891216_pe782251_s5.jpg?width=500",
             3795, 
             5, 
             "A complete bed designed to be comfortable both for sleeping and reading. It provides nice support where needed, has a soft feel where possible – and is smartly packaged, making it easy to transport."
@@ -39,7 +39,7 @@ try:
         (
             40571248, 
             "SLATTUM",
-            "https://www.ikea.com/se/sv/images/products/slattum-klaedd-saengstomme-vissle-moerkgra__1259335_pe926650_s5.jpg?f=u",
+            "https://www.ikea.com/se/sv/images/products/slattum-klaedd-saengstomme-vissle-moerkgra__1259335_pe926650_s5.jpg?width=500",
             1495, 
             0, 
             "SLATTUM bed frame has soft upholstery and a padded headboard that complete the stylish and simple lines. Easy to like – and convenient to bring home thanks to the whole frame coming in a single package."
@@ -47,7 +47,7 @@ try:
         (
             90447176, 
             "IDANÄS",
-            "https://www.ikea.com/se/en/images/products/idanaes-upholstered-storage-bed-gunnared-dark-grey__1151051_pe884753_s5.jpg?f=u",
+            "https://www.ikea.com/se/en/images/products/idanaes-upholstered-storage-bed-gunnared-dark-grey__1151051_pe884753_s5.jpg?width=500",
             7995, 
             3, 
             "The sloping headboard and soft upholstery make this bed frame extra comfortable. Classic button detailing and turned wooden legs are timeless, while soft-closing drawers under the bed add everyday storage."
@@ -55,7 +55,7 @@ try:
                 (
             40407922, 
             "BRIMNES",
-            "https://www.ikea.com/se/en/images/products/brimnes-wardrobe-with-3-doors-white__0176787_pe329567_s5.jpg?f=u",
+            "https://www.ikea.com/se/en/images/products/brimnes-wardrobe-with-3-doors-white__0176787_pe329567_s5.jpg?width=500",
             1995, 
             1, 
             "Small spaces need smart storage. This wardrobe has a clothes rail for shirts and dresses, shelves for folded clothes, shoes and bags – and a mirror door too so you avoid needing to mount a separate mirror."
@@ -63,7 +63,7 @@ try:
         (
             40470089, 
             "VESTERÖY",
-            "https://www.ikea.com/se/en/images/products/vesteroey-pocket-sprung-mattress-medium-firm-light-blue__1150853_pe884906_s5.jpg?f=u",
+            "https://www.ikea.com/se/en/images/products/vesteroey-pocket-sprung-mattress-medium-firm-light-blue__1150853_pe884906_s5.jpg?width=500",
             1795, 
             0, 
             "A medium-firm 20 cm high mattress with individual pocket springs and a layer of foam offers comfort and support. The cover with extra foam and a soft stretch fabric adds even more comfort."
@@ -82,20 +82,20 @@ try:
         ("bedroom", "Bedroom", "https://www.ikea.com/ext/ingkadam/m/5b082ba034c824b8/original/PH200846.jpg?imwidth=500", NULL), 
         ("bed", "Beds", "https://www.ikea.com/se/sv/range-categorisation/images/product/beds-bm003.jpeg?imwidth=500", "bedroom"), 
 
-         ("doublebed", "Double Beds", "https://www.ikea.com/global/assets/range-categorisation/images/product/double-beds-16284.jpeg?imwidth=160", "bed"),
-         ("sofa-bed", "Sofa-beds", "https://www.ikea.com/global/assets/range-categorisation/images/product/sofa-beds-10663.jpeg?imwidth=160", "bed"),
-         ("divanbed", "Divan beds", "https://www.ikea.com/global/assets/range-categorisation/images/product/divan-beds-28433.jpeg?imwidth=160", "bed"),
-         ("singlebed", "Single beds", "https://www.ikea.com/se/sv/range-categorisation/images/product/single-beds-16285.jpeg?imwidth=160", "bed"),
+         ("doublebed", "Double Beds", "https://www.ikea.com/global/assets/range-categorisation/images/product/double-beds-16284.jpeg?imwidth=500", "bed"),
+         ("sofa-bed", "Sofa-beds", "https://www.ikea.com/global/assets/range-categorisation/images/product/sofa-beds-10663.jpeg?imwidth=500", "bed"),
+         ("divanbed", "Divan beds", "https://www.ikea.com/global/assets/range-categorisation/images/product/divan-beds-28433.jpeg?imwidth=500", "bed"),
+         ("singlebed", "Single beds", "https://www.ikea.com/se/sv/range-categorisation/images/product/single-beds-16285.jpeg?imwidth=500", "bed"),
 
         ("lamp", "Lamps", "https://www.ikea.com/global/assets/range-categorisation/images/product/lamps-li002.jpeg?imwidth=500", "bedroom"),
-        ("mattresses", "Mattresses", "https://www.ikea.com/global/assets/range-categorisation/images/product/mattresses-bm002.jpeg?imwidth=160", "bedroom"), 
-        ("wardrobes", "Wardrobes", "https://www.ikea.com/global/assets/range-categorisation/images/product/wardrobes-19053.jpeg?imwidth=160", "bedroom"),
-        ("lighting", "Lighting", "https://www.ikea.com/se/sv/range-categorisation/images/product/lighting-li001.jpeg?imwidth=160", "bedroom"),
-        ("childrensroom", "Children's room", "https://www.ikea.com/ext/ingkadam/m/41d17d5948e99544/original/PH200516.jpg?imwidth=300", NULL),
-         ("livingroom", "Living room", "https://www.ikea.com/ext/ingkadam/m/7262b24abd9b498f/original/PH200284.jpg?imwidth=300", NULL),
-         ("kitchen", "Kitchen", "https://www.ikea.com/ext/ingkadam/m/3f08c0f072397c16/original/PH200757_SHI_001.jpg?imwidth=300", NULL),
-         ("homeoffice", "Home office", "https://www.ikea.com/ext/ingkadam/m/2345c6d3fe01268b/original/PH199092.jpg?imwidth=300", NULL),
-         ("bathroom", "Bathroom", "https://www.ikea.com/ext/ingkadam/m/a526ca14590e862/original/PH200663_SHI_002.jpg?imwidth=300", NULL);
+        ("mattresses", "Mattresses", "https://www.ikea.com/global/assets/range-categorisation/images/product/mattresses-bm002.jpeg?imwidth=500", "bedroom"), 
+        ("wardrobes", "Wardrobes", "https://www.ikea.com/global/assets/range-categorisation/images/product/wardrobes-19053.jpeg?imwidth=500", "bedroom"),
+        ("lighting", "Lighting", "https://www.ikea.com/se/sv/range-categorisation/images/product/lighting-li001.jpeg?imwidth=500", "bedroom"),
+        ("childrensroom", "Children's room", "https://www.ikea.com/ext/ingkadam/m/41d17d5948e99544/original/PH200516.jpg?imwidth=500", NULL),
+         ("livingroom", "Living room", "https://www.ikea.com/ext/ingkadam/m/7262b24abd9b498f/original/PH200284.jpg?imwidth=500", NULL),
+         ("kitchen", "Kitchen", "https://www.ikea.com/ext/ingkadam/m/3f08c0f072397c16/original/PH200757_SHI_001.jpg?imwidth=500", NULL),
+         ("homeoffice", "Home office", "https://www.ikea.com/ext/ingkadam/m/2345c6d3fe01268b/original/PH199092.jpg?imwidth=500", NULL),
+         ("bathroom", "Bathroom", "https://www.ikea.com/ext/ingkadam/m/a526ca14590e862/original/PH200663_SHI_002.jpg?imwidth=500", NULL);
 
         """
     )
